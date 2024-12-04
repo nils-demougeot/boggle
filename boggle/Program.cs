@@ -14,7 +14,7 @@ class Program
         // Console.WriteLine(de.toString());
 
         // *************************** TEST CLASSE PLATEAU ***************************
-        Random r = new Random();
+        /*Random r = new Random();
         int taille = 4;
         De[,] des = new De[taille, taille];
         for (int i = 0; i < taille; i++)
@@ -31,7 +31,16 @@ class Program
             Console.WriteLine(plateau.toString());
             Console.WriteLine(plateau.Test_Plateau(Console.ReadLine()) + "\n");
             Console.ReadLine();
-        }
-    }
+        }*/
 
+        // ************************* TEST CLASSE JEU ***************************
+        int dureeEnMin = 6;
+        Jeu jeu = new Jeu(dureeEnMin * 60);
+        jeu.J1 = jeu.SaisirNom(1);
+        jeu.J2 = jeu.SaisirNom(2);
+        TimeSpan duree = TimeSpan.FromSeconds(dureeEnMin * 60);
+        DateTime debut = DateTime.Now;
+        jeu.AffichageMinuteur(duree, debut);
+
+    }
 }
