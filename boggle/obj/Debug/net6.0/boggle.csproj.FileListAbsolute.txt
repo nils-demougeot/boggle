@@ -1,0 +1,14 @@
+C:\Users\tomtd\OneDrive\Documents\GitHub\boggle\boggle\bin\Debug\net6.0\boggle.exe
+C:\Users\tomtd\OneDrive\Documents\GitHub\boggle\boggle\bin\Debug\net6.0\boggle.deps.json
+C:\Users\tomtd\OneDrive\Documents\GitHub\boggle\boggle\bin\Debug\net6.0\boggle.runtimeconfig.json
+C:\Users\tomtd\OneDrive\Documents\GitHub\boggle\boggle\bin\Debug\net6.0\boggle.dll
+C:\Users\tomtd\OneDrive\Documents\GitHub\boggle\boggle\bin\Debug\net6.0\boggle.pdb
+C:\Users\tomtd\OneDrive\Documents\GitHub\boggle\boggle\obj\Debug\net6.0\boggle.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\tomtd\OneDrive\Documents\GitHub\boggle\boggle\obj\Debug\net6.0\boggle.AssemblyInfoInputs.cache
+C:\Users\tomtd\OneDrive\Documents\GitHub\boggle\boggle\obj\Debug\net6.0\boggle.AssemblyInfo.cs
+C:\Users\tomtd\OneDrive\Documents\GitHub\boggle\boggle\obj\Debug\net6.0\boggle.csproj.CoreCompileInputs.cache
+C:\Users\tomtd\OneDrive\Documents\GitHub\boggle\boggle\obj\Debug\net6.0\boggle.dll
+C:\Users\tomtd\OneDrive\Documents\GitHub\boggle\boggle\obj\Debug\net6.0\refint\boggle.dll
+C:\Users\tomtd\OneDrive\Documents\GitHub\boggle\boggle\obj\Debug\net6.0\boggle.pdb
+C:\Users\tomtd\OneDrive\Documents\GitHub\boggle\boggle\obj\Debug\net6.0\boggle.genruntimeconfig.cache
+C:\Users\tomtd\OneDrive\Documents\GitHub\boggle\boggle\obj\Debug\net6.0\ref\boggle.dll

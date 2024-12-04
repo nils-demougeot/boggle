@@ -1,20 +1,19 @@
-using System;
+﻿using System;
 
 class Program
 {
     public static void Main(string[] args)
     {
-        //Console.WriteLine("Hello World");
-
-        // TEST CLASSE DICTIONNAIRE 
+        // *************************** TEST CLASSE DICTIONNAIRE ***************************
         // Dictionnaire dico = new Dictionnaire("fr");
         // Console.WriteLine(dico.toString());
 
-        // TEST CLASSE DE
+        // *************************** TEST CLASSE DE ***************************
         // Random r = new Random();
         // De de = new De(r);
         // Console.WriteLine(de.toString());
 
+        // *************************** TEST CLASSE PLATEAU ***************************
         Random r = new Random();
         int taille = 4;
         De[,] des = new De[taille, taille];
@@ -26,10 +25,12 @@ class Program
             }
         }
         Plateau plateau = new Plateau(des);
-        Console.WriteLine(plateau.toString());
         while (true)
         {
-            Console.WriteLine(plateau.Test_Plateau(Console.ReadLine()));
+            Console.Clear();
+            Console.WriteLine(plateau.toString());
+            Console.WriteLine(plateau.Test_Plateau(Console.ReadLine()) + "\n");
+            Console.ReadLine();
         }
     }
 
