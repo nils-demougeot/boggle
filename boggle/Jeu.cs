@@ -56,8 +56,9 @@ public class Jeu
         while (true)
         {
             TimeSpan tempsRestant = this.Minuteur(duree, debut);
-            Console.SetCursorPosition(0, 20);
+            Console.SetCursorPosition(0, 0);
             Console.WriteLine(tempsRestant.Minutes + ":" + tempsRestant.Seconds);
+            Console.SetCursorPosition(0, 2);
             if (tempsRestant <= TimeSpan.Zero)
             {
                 Console.SetCursorPosition(0, 0);

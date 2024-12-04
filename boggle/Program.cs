@@ -36,6 +36,7 @@ class Program
         // ************************* TEST CLASSE JEU ***************************
         int dureeEnMin = 6;
         Jeu jeu = new Jeu(dureeEnMin * 60);
+        Console.Write("\n");
         jeu.J1 = jeu.SaisirNom(1);
         jeu.J2 = jeu.SaisirNom(2);
         TimeSpan duree = TimeSpan.FromSeconds(dureeEnMin * 60);
