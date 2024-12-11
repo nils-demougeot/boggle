@@ -6,7 +6,7 @@ public class De
 {
     char[] lettres;
     char faceVisible;
-    string path = "C:\\Users\\tomtd\\OneDrive\\Documents\\GitHub\\boogle-game-project\\docs\\Lettres.txt";
+    string path = "../../../docs/Lettres.txt";
 
     public char FaceVisible
     {
@@ -17,7 +17,7 @@ public class De
     public De(Random r)
     {
         this.lettres = new char[6];
-        string texte = File.ReadAllText(path);
+        string texte = File.ReadAllText(this.path);
         Dictionary<int, char> res = new Dictionary<int, char>();
         int somme = 0;
         string[] lignes = texte.Split('\n');

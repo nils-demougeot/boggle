@@ -9,10 +9,12 @@ public class Plateau
     De[,] des;
     char[,] facesVisibles;
     List<string> motsTrouves;
+    Dictionnaire dico;
 
-    public Plateau(De[,] _des)
+    public Plateau(De[,] _des, Dictionnaire _dico)
     {
         this.des = _des;
+        this.dico = _dico;
         this.taille = this.des.GetLength(0);
         this.facesVisibles = new char[taille, taille];
         this.motsTrouves = new List<string> { };
@@ -39,12 +41,18 @@ public class Plateau
         return output;
     }
 
-    public bool Test_Plateau(string mot)
+    public string Test_Plateau(string mot)
     {
         if (string.IsNullOrWhiteSpace(mot) || mot.Length < 2 || motsTrouves.Contains(mot))
-            return false;
+        {
+            return "";
+        }
 
         mot = mot.ToUpper();
+        if (!this.dico.RechDichoRecursif(mot, 0, (this.dico.Mots.Length - 1)))
+        {
+            return "";
+        }
         bool[,] visited = new bool[taille, taille];
 
         for (int i = 0; i < taille; i++)
@@ -56,12 +64,12 @@ public class Plateau
                     if (RechercherMot(i, j, mot, 0, visited))
                     {
                         this.motsTrouves.Add(mot);
-                        return true;
+                        return mot;
                     }
                 }
             }
         }
-        return false;
+        return "";
     }
 
     private bool RechercherMot(int x, int y, string mot, int index, bool[,] visited)

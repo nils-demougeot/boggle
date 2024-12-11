@@ -2,34 +2,34 @@ using System;
 using System.IO;
 using System.Collections.Generic;
 using System.Threading;
+using System.Threading.Tasks;
 
 public class Jeu
 {
-    string j1;
-    string j2;
-    int scoreJ1;
-    int scoreJ2;
+    string[] joueurs;
+    int[] scores;
     int minuteur;
     int manche;
-    
+    string path = "../../../docs/Lettres.txt";
+
     public Jeu(int _minuteur)
     {
-        this.scoreJ1 = 0;
-        this.scoreJ2 = 0;
         this.minuteur = _minuteur;
         this.manche = 60;
+        this.joueurs = new string[2];
+        this.scores = new int[2] { 0, 0 };
     }
 
-    public string J1
+    public string[] Joueurs
     {
-        get { return this.j1; }
-        set { this.j1 = value; }
+        get { return this.joueurs; }
+        set { this.joueurs = value; }
     }
 
-    public string J2
+    public int[] Scores
     {
-        get { return this.j2; }
-        set { this.j2 = value; }
+        get { return this.scores; }
+        set { this.scores = value; }
     }
 
     public string SaisirNom(int j)
@@ -51,22 +51,23 @@ public class Jeu
         return tempsRestant;
     }
 
-    public void AffichageMinuteur(TimeSpan duree, DateTime debut)
+    public void UpdateScore(int j, string mot)
     {
-        while (true)
+        string texte = File.ReadAllText(this.path);
+        string[] lignes = texte.Split('\n');
+        for (int i = 0; i < mot.Length; i++)
         {
-            TimeSpan tempsRestant = this.Minuteur(duree, debut);
-            Console.SetCursorPosition(0, 0);
-            Console.WriteLine(tempsRestant.Minutes + ":" + tempsRestant.Seconds);
-            Console.SetCursorPosition(0, 2);
-            if (tempsRestant <= TimeSpan.Zero)
+            foreach (string ligne in lignes)
             {
-                Console.SetCursorPosition(0, 0);
-                Console.WriteLine("Temps écoulé !");
-                break;
+                string[] parties = ligne.Split(';');
+                if (parties.Length >= 3)
+                {
+                    if (parties[0][0] == mot[i])
+                    {
+                        this.scores[j] += int.Parse(parties[1]);
+                    }
+                }
             }
-
-            Thread.Sleep(1000);
         }
     }
 }
