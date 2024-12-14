@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 public class Jeu
 {
-    string[] joueurs;
-    int[] scores;
+    Joueur[] joueurs;
     int minuteur;
     int manche;
     string path = "../../../docs/Lettres.txt";
@@ -16,22 +15,21 @@ public class Jeu
     {
         this.minuteur = _minuteur;
         this.manche = 60;
-        this.joueurs = new string[2];
-        this.scores = new int[2] { 0, 0 };
+        this.joueurs = new Joueur[2];
     }
 
-    public string[] Joueurs
+    public Joueur[] Joueurs
     {
         get { return this.joueurs; }
         set { this.joueurs = value; }
     }
 
-    public int[] Scores
-    {
-        get { return this.scores; }
-        set { this.scores = value; }
-    }
-
+    #region Saisie Nom
+    /// <summary>
+    /// Demande à l'utilisateur de saisir son nom de joueur dans la console et enregistre cette chaine de caractère
+    /// </summary>
+    /// <param name="j">Le numéro du joueur (1 ou 2)</param>
+    /// <returns>Retourne le nom saisi dans la console par le joueur</returns>
     public string SaisirNom(int j)
     {
         Console.Write("Nom du joueur " + j + " : ");
@@ -43,14 +41,29 @@ public class Jeu
         }
         return saisie;
     }
+    #endregion
 
+    #region Minuteur
+    /// <summary>
+    /// Lance un minuteur en fonction de la durée voulue et de l'heure de départ
+    /// </summary>
+    /// <param name="duree">Durée du minuteur</param>
+    /// <param name="debut">Heure de début du minuteur</param>
+    /// <returns>Retourne le temps restant, de type TimeSpan</returns>
     public TimeSpan Minuteur(TimeSpan duree, DateTime debut)
     {
         TimeSpan tempsEcoule = DateTime.Now - debut;
         TimeSpan tempsRestant = duree - tempsEcoule;
         return tempsRestant;
     }
+    #endregion
 
+    #region Mise à jour du score
+    /// <summary>
+    /// Met à jour le score du joueur en fonction du mot entré
+    /// </summary>
+    /// <param name="j">Numéro du joueur (0 étant le premier joueur et 1 le second)</param>
+    /// <param name="mot">Mot entré par le joueur, précédemment vérifié</param>
     public void UpdateScore(int j, string mot)
     {
         string texte = File.ReadAllText(this.path);
@@ -64,10 +77,11 @@ public class Jeu
                 {
                     if (parties[0][0] == mot[i])
                     {
-                        this.scores[j] += int.Parse(parties[1]);
+                        this.joueurs[j].Score += int.Parse(parties[1]);
                     }
                 }
             }
         }
     }
+    #endregion
 }

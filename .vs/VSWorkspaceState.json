@@ -1,7 +1,8 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\boggle"
   ],
-  "SelectedNode": "\\Plateau.cs",
+  "SelectedNode": "\\boggle\\Program.cs",
   "PreviewInSolutionExplorer": false
 }

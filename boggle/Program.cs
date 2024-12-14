@@ -23,9 +23,9 @@ class Program
         Console.Write("Nombre de manche par joueur : ");
         int dureeEnMin = Convert.ToInt32(Console.ReadLine()) * 2;
         Jeu jeu = new Jeu(dureeEnMin * 60);
-        string[] joueurs = new string[2];
-        joueurs[0] = jeu.SaisirNom(1);
-        joueurs[1] = jeu.SaisirNom(2);
+        Joueur j1 = new Joueur(jeu.SaisirNom(1));
+        Joueur j2 = new Joueur(jeu.SaisirNom(2));
+        Joueur[] joueurs = new Joueur[2] { j1, j2 };
         jeu.Joueurs = joueurs;
         TimeSpan duree = TimeSpan.FromSeconds(dureeEnMin * 60);
         DateTime debut = DateTime.Now;
@@ -38,7 +38,7 @@ class Program
 
         for (int i = 0; i < dureeEnMin; i++)
         {
-            
+            joueurs[(i % 2)].Mots = new List<string>();
             TimeSpan dureeManche = TimeSpan.FromSeconds(60);
             DateTime debutManche = DateTime.Now;
             De[,] des = new De[taille, taille];
@@ -55,37 +55,46 @@ class Program
                 Console.Clear();
                 Console.ForegroundColor = ConsoleColor.DarkGreen;
                 Console.WriteLine(asciiArt);
-                Console.ResetColor(); Console.Write("C'et au tour de ");
+                Console.ResetColor(); Console.Write("C'est au tour de ");
                 if (i % 2 == 0)
                 {
                     Console.ForegroundColor = ConsoleColor.Blue;
                 }
                 else
                 { Console.ForegroundColor = ConsoleColor.Red; }
-                Console.WriteLine(jeu.Joueurs[(i % 2)]);
+                Console.WriteLine(jeu.Joueurs[(i % 2)].Nom);
                 Console.ResetColor();
                 TimeSpan tempsRestant = jeu.Minuteur(dureeManche, debutManche);
                 Console.WriteLine("Temps restant : " + tempsRestant.Minutes + ":" + tempsRestant.Seconds);
-                Console.WriteLine("Score : " + jeu.Scores[i % 2] + "\n");
+                Console.WriteLine("Score : " + jeu.Joueurs[i % 2].Score + "\n");
                 Console.WriteLine(plateau.toString());
-                string mot = plateau.Test_Plateau(Console.ReadLine());
-                if (mot == "")
+                string mot = Console.ReadLine();
+                string res = plateau.Test_Plateau(mot, jeu.Joueurs[(i % 2)]);
+                Console.WriteLine(res);
+                if (res == "Mot valide")
                 {
-                    Console.Write("Incorrect");
+                    jeu.UpdateScore((i % 2), mot);
                 }
-                else
-                {
-                    Console.Write("Correct");
-                }
-                jeu.UpdateScore((i % 2), mot);
+                
                 Console.ReadLine();
             }
         }
         Console.Clear();
-        Console.WriteLine("Score de " + joueurs[0] + " : " + jeu.Scores[0] + "\n");
-        Console.WriteLine("Score de " + joueurs[1] + " : " + jeu.Scores[1] + "\n");
-        int gagnant = Array.IndexOf(jeu.Scores, Math.Max(jeu.Scores[0], jeu.Scores[1]));
-        Console.WriteLine(joueurs[gagnant] + " a gagné !");
+        Console.WriteLine(jeu.Joueurs[0].toString());
+        Console.WriteLine(jeu.Joueurs[1].toString());
+        int gagnant = Array.IndexOf(jeu.Joueurs, Math.Max(jeu.Joueurs[0].Score, jeu.Joueurs[1].Score));
+        if (jeu.Joueurs[0].Score > jeu.Joueurs[1].Score)
+        {
+            Console.WriteLine(jeu.Joueurs[0].Nom + " a gagné !");
+        }
+        else if (jeu.Joueurs[0].Score < jeu.Joueurs[1].Score) 
+        {
+            Console.WriteLine(jeu.Joueurs[1].Nom + " a gagné !");
+        }
+        else
+        {
+            Console.WriteLine("Ex-aequo !");
+        }
         Console.ReadLine();
     }
 }

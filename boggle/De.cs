@@ -44,13 +44,25 @@ public class De
                 }
             }
         }
-        Lance(r);
+        LancerDe(r);
     }
 
-    public void Lance(Random r)
+
+    #region Lancer un Dé
+    /// <summary>
+    /// Sélectionne une face aléatoire du dé, c'est à dire, une lettre aléatoire dans le tableau de lettre que représente le dé
+    /// </summary>
+    /// <param name="r">Instance de la classe Random qui nous permettra d'avoir un nombre aléatoire entre 0 et la longueur du tableau/dé avec r.Next()</param> 
+    public void LancerDe(Random r)
     {
         this.faceVisible = this.lettres[r.Next(0, this.lettres.Length)];
     }
+    #endregion
+    #region toString
+    /// <summary>
+    /// Fonction qui décrit le dé : toutes les lettres qu'il contient sur chaque "face" et sa face visible / sa lettre active
+    /// </summary>
+    /// <returns>Retourne une chaine de caractère décrivant le dé sous cette forme : Lettres : A, B, C, D, E, F Face visible : B</returns>
     public string toString()
     {
         string listeLettres = "";
@@ -60,4 +72,5 @@ public class De
         }
         return "Lettres : " + listeLettres + "\nFace visible : " + this.faceVisible;
     }
+    #endregion
 }

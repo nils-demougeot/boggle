@@ -32,7 +32,14 @@ public class Joueur
         set { this.mots = value; }
     }
 
-    public bool Contain(string mot) //qui teste si le mot passé appartient déjà aux mots trouvés par le joueur pendant la partie
+    #region Vérifier si le mot a déjà été trouvé
+    /// <summary>
+    /// Fonction vérifiant si le mot passé en paramètre n'a pas déjà été trouvé pendant la manche, 
+    /// c-a-d s'il n'est pas deja présent dans la liste "Mots" du joueur
+    /// </summary>
+    /// <param name="mot">Mot à vérifier</param>
+    /// <returns>Retourne True si le mot a déjà été trouvé, False sinon</returns>
+    public bool Contains(string mot)
     {
         bool exist = false;
         for (int i = 0; i < this.mots.Count; i++)
@@ -44,15 +51,28 @@ public class Joueur
         }
         return exist;
     }
+    #endregion
 
-    public void Add_Mot(string mot) //ajoute le mot dans la liste des mots déjà trouvés par le joueur au cours de la partie en modifiant le nombre d’occurrences si nécessaire
+    #region Ajouter un mot aux mots déjà trouvés
+    /// <summary>
+    /// Ajoute le mot en paramètre à la liste de mots deja trouvés
+    /// </summary>
+    /// <param name="mot">Mot à ajouter</param>
+    public void AddMot(string mot)
     {
         mots.Add(mot);
     }
+    #endregion
 
-    public string toString() //qui retourne une chaîne de caractères qui décrit un joueur.
+    #region Description du joueur
+    /// <summary>
+    /// Fonction décrivant le joueur en fonction de son nom et de son score
+    /// </summary>
+    /// <returns>Retourne une chaine de caractère décrivant le joueur sous cette forme : "Michel : 50 points"</returns>
+    public string toString()
     {
-        return "Joueur " + nom + " : " + score + " points";
+        return nom + " : " + score + " points";
     }
+    #endregion
 
 }
