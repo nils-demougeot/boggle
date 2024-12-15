@@ -9,7 +9,6 @@ public class Plateau
     int taille;
     De[,] des;
     char[,] facesVisibles;
-    List<string> motsTrouves;
     Dictionnaire dico;
 
     public Plateau(De[,] _des, Dictionnaire _dico)
@@ -18,7 +17,6 @@ public class Plateau
         this.dico = _dico;
         this.taille = this.des.GetLength(0);
         this.facesVisibles = new char[taille, taille];
-        this.motsTrouves = new List<string> { };
         for (int i = 0; i < taille; i++)
         {
             for (int j = 0; j < taille; j++)

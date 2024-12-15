@@ -66,6 +66,7 @@ public class Jeu
     /// <param name="mot">Mot entré par le joueur, précédemment vérifié</param>
     public void UpdateScore(int j, string mot)
     {
+        mot = mot.ToUpper();
         string texte = File.ReadAllText(this.path);
         string[] lignes = texte.Split('\n');
         for (int i = 0; i < mot.Length; i++)

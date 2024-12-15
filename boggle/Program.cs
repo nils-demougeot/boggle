@@ -34,11 +34,15 @@ class Program
         int taille = Convert.ToInt32(Console.ReadLine());
         Console.Write("Langue (\"fr\" ou \"en\") : ");
         Dictionnaire dico = new Dictionnaire(Console.ReadLine());
-        
+        List<string> motsTrouves = new List<string>();
 
         for (int i = 0; i < dureeEnMin; i++)
         {
-            joueurs[(i % 2)].Mots = new List<string>();
+            for (int j = 0; j < jeu.Joueurs[(i % 2)].Mots.Count; j++)
+            {
+                motsTrouves.Add(jeu.Joueurs[(i % 2)].Mots[j]);
+            }
+            jeu.Joueurs[(i % 2)].Mots = new List<string>();
             TimeSpan dureeManche = TimeSpan.FromSeconds(60);
             DateTime debutManche = DateTime.Now;
             De[,] des = new De[taille, taille];
@@ -66,16 +70,15 @@ class Program
                 Console.ResetColor();
                 TimeSpan tempsRestant = jeu.Minuteur(dureeManche, debutManche);
                 Console.WriteLine("Temps restant : " + tempsRestant.Minutes + ":" + tempsRestant.Seconds);
-                Console.WriteLine("Score : " + jeu.Joueurs[i % 2].Score + "\n");
+                Console.WriteLine("Score : " + jeu.Joueurs[(i % 2)].Score + "\n");
                 Console.WriteLine(plateau.toString());
-                string mot = Console.ReadLine();
+                string mot = Console.ReadLine().ToUpper();
                 string res = plateau.Test_Plateau(mot, jeu.Joueurs[(i % 2)]);
                 Console.WriteLine(res);
                 if (res == "Mot valide")
                 {
                     jeu.UpdateScore((i % 2), mot);
                 }
-                
                 Console.ReadLine();
             }
         }
