@@ -12,3 +12,10 @@ C:\Users\tomtd\OneDrive\Documents\GitHub\boggle\boggle\obj\Debug\net6.0\refint\b
 C:\Users\tomtd\OneDrive\Documents\GitHub\boggle\boggle\obj\Debug\net6.0\boggle.pdb
 C:\Users\tomtd\OneDrive\Documents\GitHub\boggle\boggle\obj\Debug\net6.0\boggle.genruntimeconfig.cache
 C:\Users\tomtd\OneDrive\Documents\GitHub\boggle\boggle\obj\Debug\net6.0\ref\boggle.dll
+C:\Users\tomtd\OneDrive\Documents\GitHub\boggle\boggle\bin\Debug\net6.0\SkiaSharp.dll
+C:\Users\tomtd\OneDrive\Documents\GitHub\boggle\boggle\bin\Debug\net6.0\runtimes\osx\native\libSkiaSharp.dylib
+C:\Users\tomtd\OneDrive\Documents\GitHub\boggle\boggle\bin\Debug\net6.0\runtimes\win-arm64\native\libSkiaSharp.dll
+C:\Users\tomtd\OneDrive\Documents\GitHub\boggle\boggle\bin\Debug\net6.0\runtimes\win-x64\native\libSkiaSharp.dll
+C:\Users\tomtd\OneDrive\Documents\GitHub\boggle\boggle\bin\Debug\net6.0\runtimes\win-x86\native\libSkiaSharp.dll
+C:\Users\tomtd\OneDrive\Documents\GitHub\boggle\boggle\obj\Debug\net6.0\boggle.csproj.AssemblyReference.cache
+C:\Users\tomtd\OneDrive\Documents\GitHub\boggle\boggle\obj\Debug\net6.0\boggle.csproj.CopyComplete
