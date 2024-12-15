@@ -1,8 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "9ugA+uZdXFleohzYTPWTuGHY/s88xII30BisAK+zTMDAYGiTpSC9wcqFLyLYEUh5W4+POeWBoJ7Knoj2IyZVTA==",
+  "dgSpecHash": "LEeM1fOiHDo=",
   "success": true,
-  "projectFilePath": "C:\\Users\\tomtd\\OneDrive\\Documents\\GitHub\\boggle\\boggle\\boggle.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\Users\\Nils\\Documents\\GitHub\\boggleV2\\boggle\\boggle\\boggle.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Nils\\.nuget\\packages\\skiasharp\\3.116.1\\skiasharp.3.116.1.nupkg.sha512",
+    "C:\\Users\\Nils\\.nuget\\packages\\skiasharp.nativeassets.macos\\3.116.1\\skiasharp.nativeassets.macos.3.116.1.nupkg.sha512",
+    "C:\\Users\\Nils\\.nuget\\packages\\skiasharp.nativeassets.win32\\3.116.1\\skiasharp.nativeassets.win32.3.116.1.nupkg.sha512"
+  ],
   "logs": []
 }
