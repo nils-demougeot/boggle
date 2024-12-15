@@ -1,10 +1,13 @@
-﻿using System;
+﻿using boggle;
+using System;
 using System.Runtime.CompilerServices;
 
 class Program
 {
     public static void Main(string[] args)
     {
+        NuageDeMots.TestDisplay();
+
         string asciiArt =
 " ___                 _      \n" +
 "| . > ___  ___  ___ | | ___ \n" +
@@ -99,5 +102,27 @@ class Program
             Console.WriteLine("Ex-aequo !");
         }
         Console.ReadLine();
+
+
+
+        /*
+        NuageDeMots.TestDisplay();
+        Dictionary<string, int> motsTrouvesFrequence = new Dictionary<string, int>();
+
+        foreach (var item in items)
+        {
+            if (motsTrouvesFrequence.ContainsKey(item))
+            {
+                motsTrouvesFrequence[item]++;
+            }
+            else
+            {
+                motsTrouvesFrequence[item] = 1;
+            }
+
+        }
+        */
+
+
     }
 }
