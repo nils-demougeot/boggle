@@ -6,7 +6,6 @@ class Program
 {
     public static void Main(string[] args)
     {
-        NuageDeMots.TestDisplay();
 
         string asciiArt =
 " ___                 _      \n" +
@@ -107,11 +106,8 @@ class Program
 
 
 
-        /*
-        NuageDeMots.TestDisplay();
         Dictionary<string, int> motsTrouvesFrequence = new Dictionary<string, int>();
-
-        foreach (var item in items)
+        foreach (var item in motsTrouves)
         {
             if (motsTrouvesFrequence.ContainsKey(item))
             {
@@ -121,9 +117,11 @@ class Program
             {
                 motsTrouvesFrequence[item] = 1;
             }
-
+            //a verif si fonctionne vrmt
         }
-        */
+
+        NuageDeMots.Affichage(motsTrouvesFrequence);
+
 
 
     }

@@ -14,7 +14,7 @@ namespace boggle
 {
     public class NuageDeMots
     {
-        public void DisplayWordCloud(Dictionary<string, int> wordFrequencies, string outputPath, int canvasWidth = 800, int canvasHeight = 600)
+        public void CreerNuageDeMots(Dictionary<string, int> wordFrequencies, string outputPath, int canvasWidth = 800, int canvasHeight = 600)
         {
             // Validate inputs
             if (wordFrequencies == null || !wordFrequencies.Any())
@@ -53,7 +53,7 @@ namespace boggle
                 // Create paint for the word
                 using var paint = new SKPaint
                 {
-                    Color = new SKColor((byte)random.Next(256), (byte)random.Next(256), (byte)random.Next(256)),
+                    Color = new SKColor((byte)random.Next(180), (byte)random.Next(180), (byte)random.Next(180)), //peut etre blanc donc prblm
                     TextSize = fontSize,
                     IsAntialias = true,
                     Typeface = SKTypeface.FromFamilyName("Arial")
@@ -72,19 +72,12 @@ namespace boggle
             Console.WriteLine($"Word cloud saved to {outputPath}");
         }
 
-        static public void TestDisplay()
+        static public void Affichage(Dictionary<string, int> motsTrouvesFrequence)
         {
-            Dictionary<string, int> wordFrequencies = new Dictionary<string, int>
-{
-    { "HELLO", 10 },
-    { "WORLD", 5 },
-    { "CLOUD", 15 },
-    { "SKY", 8 }
-};
 
             string outputPath = "wordcloud.png"; // Chemin pour enregistrer l'image de sortie
             NuageDeMots generator = new NuageDeMots();
-            generator.DisplayWordCloud(wordFrequencies, outputPath);
+            generator.CreerNuageDeMots(motsTrouvesFrequence, outputPath);
             Process.Start(new ProcessStartInfo(outputPath) { UseShellExecute = true });
         }
     }
