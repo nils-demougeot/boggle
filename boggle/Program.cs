@@ -56,10 +56,11 @@ class Program
             Plateau plateau = new Plateau(des, dico);
             while (jeu.Minuteur(dureeManche, debutManche) > TimeSpan.Zero)
             {
-                Console.Clear();
-                Console.ForegroundColor = ConsoleColor.DarkGreen;
-                Console.WriteLine(asciiArt);
-                Console.ResetColor(); Console.Write("C'est au tour de ");
+                // Console.Clear();
+                // Console.ForegroundColor = ConsoleColor.DarkGreen;
+                // Console.WriteLine(asciiArt);
+                // Console.ResetColor(); 
+                Console.Write("C'est au tour de ");
                 if (i % 2 == 0)
                 {
                     Console.ForegroundColor = ConsoleColor.Blue;
