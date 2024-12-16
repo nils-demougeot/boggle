@@ -16,11 +16,13 @@ public class Plateau
         this.des = _des;
         this.dico = _dico;
         this.taille = this.des.GetLength(0);
+        Random r = new Random();
         this.facesVisibles = new char[taille, taille];
         for (int i = 0; i < taille; i++)
         {
             for (int j = 0; j < taille; j++)
             {
+                des[i, j].LancerDe(r);
                 facesVisibles[i, j] = des[i, j].FaceVisible;
             }
         }

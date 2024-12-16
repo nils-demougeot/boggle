@@ -37,21 +37,21 @@ class Program
         Console.Write("Langue (\"fr\" ou \"en\") : ");
         Dictionnaire dico = new Dictionnaire(Console.ReadLine());
         List<string> motsTrouves = new List<string>();
-
+        De[,] des = new De[taille, taille];
+        for (int x = 0; x < taille; x++)
+        {
+            for (int y = 0; y < taille; y++)
+            {
+                des[x, y] = new De(r);
+            }
+        }
         for (int i = 0; i < dureeEnMin; i++)
         {
             
             jeu.Joueurs[(i % 2)].Mots = new List<string>();
             TimeSpan dureeManche = TimeSpan.FromSeconds(60);
             DateTime debutManche = DateTime.Now;
-            De[,] des = new De[taille, taille];
-            for (int x = 0; x < taille; x++)
-            {
-                for (int y = 0; y < taille; y++)
-                {
-                    des[x, y] = new De(r);
-                }
-            }
+            
             Plateau plateau = new Plateau(des, dico);
             while (jeu.Minuteur(dureeManche, debutManche) > TimeSpan.Zero)
             {
