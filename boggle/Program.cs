@@ -41,10 +41,7 @@ class Program
 
         for (int i = 0; i < dureeEnMin; i++)
         {
-            for (int j = 0; j < jeu.Joueurs[(i % 2)].Mots.Count; j++)
-            {
-                motsTrouves.Add(jeu.Joueurs[(i % 2)].Mots[j]);
-            }
+            
             jeu.Joueurs[(i % 2)].Mots = new List<string>();
             TimeSpan dureeManche = TimeSpan.FromSeconds(60);
             DateTime debutManche = DateTime.Now;
@@ -83,6 +80,10 @@ class Program
                     jeu.UpdateScore((i % 2), mot);
                 }
                 Console.ReadLine();
+            }
+            for (int j = 0; j < jeu.Joueurs[(i % 2)].Mots.Count; j++)
+            {
+                motsTrouves.Add(jeu.Joueurs[(i % 2)].Mots[j]);
             }
         }
         Console.Clear();
