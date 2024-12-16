@@ -32,8 +32,8 @@ namespace boggle
             // Prepare variables
             Random random = new Random();
             int maxFrequency = wordFrequencies.Values.Max();
-            int minFontSize = 10; // Minimum font size
-            int maxFontSize = 50; // Maximum font size
+            int minFontSize = 20; // Minimum font size
+            int maxFontSize = 80; // Maximum font size
 
             // Sort words by frequency (descending)
             var sortedWords = wordFrequencies.OrderByDescending(kvp => kvp.Value);
