@@ -22,7 +22,7 @@ public class IA
 
     public void Jouer()
     {
-        List<string> mots = new List<string>;
+        List<string> mots = new List<string>();
         TimeSpan dureeIA = TimeSpan.FromSeconds(60);
         DateTime debutIA = DateTime.Now;
         while (jeu.Minuteur(dureeIA, debutIA) > TimeSpan.Zero)
@@ -30,7 +30,7 @@ public class IA
             Random random = new Random();
             int r = random.Next(dico.Mots.Length);
             string mot = dico.Mots[r];
-            mots.Push(mot);
+            mots.Add(mot);
             if (plateau.Test_Plateau(mot, this.jeu.Joueurs[1]) == "Mot valide")
             {
                 this.jeu.UpdateScore(1, mot);
@@ -54,16 +54,17 @@ public class IA
                 Console.WriteLine(jeu.Joueurs[1].Score + "\n");
                 Console.ResetColor();
                 Console.WriteLine(plateau.toString());
+
+                Console.Write("-> ");
                 Console.ForegroundColor = ConsoleColor.Magenta;
                 TimeSpan duree = TimeSpan.FromSeconds(15 / difficulte);
                 DateTime debut = DateTime.Now;
-                Console.Write("->");
 
                 while (this.jeu.Minuteur(duree, debut) > TimeSpan.Zero)
                 {
                     for (int i = 0; i < mot.Length; i++)
                     {
-                        for (int m = 0; m < mots.Count, m++)
+                        for (int m = 0; m < mots.Count; m++)
                         {
                             TimeSpan dureeTry = TimeSpan.FromSeconds(0.05 + random.NextDouble() * (0.4 - 0.05));
                             DateTime debutTry = DateTime.Now;

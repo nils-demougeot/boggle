@@ -35,11 +35,11 @@ public class Jeu
         Console.Write("Nom du joueur " + j);
         if (j == 1)
         {
-            Console.Write(" : ");
+            Console.Write(" : "); 
             Console.ForegroundColor = ConsoleColor.Blue;
         } else
         {
-            Console.Write(" (écrivez ia si vous voulez jouer contre l'ia) : ");
+            Console.Write(" : ");
             Console.ForegroundColor = ConsoleColor.Red;
         }
         string saisie = Console.ReadLine();

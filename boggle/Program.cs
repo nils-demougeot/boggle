@@ -28,6 +28,7 @@ class Program
         bool vsIA = false;
         Console.ResetColor();
         Jeu jeu = new Jeu(nbTours * 60);
+        Console.Write("Noms des joueurs (écrivez \"ia\" si vous voulez jouer contre l'ia) : ");
         Joueur j1 = new Joueur(jeu.SaisirNom(1));
         Joueur j2 = new Joueur(jeu.SaisirNom(2));
         int difficulte = 1;
@@ -35,7 +36,9 @@ class Program
         {
             vsIA = true;
             Console.Write("Niveau de difficulté de l'IA [1, 2, 3] : ");
+            Console.ForegroundColor = ConsoleColor.Yellow;
             difficulte = Convert.ToInt32(Console.ReadLine());
+            Console.ResetColor();
         }
         Joueur[] joueurs = new Joueur[2] { j1, j2 };
         jeu.Joueurs = joueurs;
@@ -131,7 +134,6 @@ class Program
                 {
                     jeu.UpdateScore((i % 2), mot);
                 }
-                Console.ReadLine();
             }
             for (int j = 0; j < jeu.Joueurs[(i % 2)].Mots.Count; j++)
             {
