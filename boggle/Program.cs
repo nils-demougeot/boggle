@@ -23,19 +23,25 @@ class Program
         Console.WriteLine(asciiArt);
         Console.ResetColor();
         Console.Write("Nombre de manche par joueur : ");
-        int dureeEnMin = Convert.ToInt32(Console.ReadLine()) * 2;
-        Jeu jeu = new Jeu(dureeEnMin * 60);
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        int nbTours = Convert.ToInt32(Console.ReadLine()) * 2;
+        Console.ResetColor();
+        Jeu jeu = new Jeu(nbTours * 60);
         Joueur j1 = new Joueur(jeu.SaisirNom(1));
         Joueur j2 = new Joueur(jeu.SaisirNom(2));
         Joueur[] joueurs = new Joueur[2] { j1, j2 };
         jeu.Joueurs = joueurs;
-        TimeSpan duree = TimeSpan.FromSeconds(dureeEnMin * 60);
+        TimeSpan duree = TimeSpan.FromSeconds(nbTours * 60);
         DateTime debut = DateTime.Now;
         Random r = new Random();
         Console.Write("Taille du plateau : ");
+        Console.ForegroundColor = ConsoleColor.Yellow;
         int taille = Convert.ToInt32(Console.ReadLine());
+        Console.ResetColor();
         Console.Write("Langue (\"fr\" ou \"en\") : ");
+        Console.ForegroundColor = ConsoleColor.Yellow;
         Dictionnaire dico = new Dictionnaire(Console.ReadLine());
+        Console.ResetColor();
         List<string> motsTrouves = new List<string>();
         De[,] des = new De[taille, taille];
         for (int x = 0; x < taille; x++)
@@ -45,9 +51,21 @@ class Program
                 des[x, y] = new De(r);
             }
         }
-        for (int i = 0; i < dureeEnMin; i++)
+        for (int i = 0; i < nbTours; i++)
         {
-            
+            Console.ForegroundColor = ConsoleColor.DarkGray;
+            Console.Write("\n||----------- À ");
+            if (i % 2 == 0)
+            {
+                Console.ForegroundColor = ConsoleColor.Blue;
+            }
+            else
+            { Console.ForegroundColor = ConsoleColor.Red; }
+            Console.Write(jeu.Joueurs[(i % 2)].Nom);
+            Console.ForegroundColor = ConsoleColor.DarkGray;
+            Console.WriteLine(" de jouer -----------||\n");
+            Console.ResetColor();
+
             jeu.Joueurs[(i % 2)].Mots = new List<string>();
             TimeSpan dureeManche = TimeSpan.FromSeconds(60);
             DateTime debutManche = DateTime.Now;
@@ -59,21 +77,30 @@ class Program
                 // Console.ForegroundColor = ConsoleColor.DarkGreen;
                 // Console.WriteLine(asciiArt);
                 // Console.ResetColor(); 
+                Console.WriteLine();
+                Console.ResetColor();
+
                 Console.Write("C'est au tour de ");
                 if (i % 2 == 0)
                 {
                     Console.ForegroundColor = ConsoleColor.Blue;
                 }
                 else
-                { Console.ForegroundColor = ConsoleColor.Red; }
+                { 
+                    Console.ForegroundColor = ConsoleColor.Red; 
+                }
                 Console.WriteLine(jeu.Joueurs[(i % 2)].Nom);
                 Console.ResetColor();
+
                 TimeSpan tempsRestant = jeu.Minuteur(dureeManche, debutManche);
                 Console.Write("Temps restant : ");
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine(tempsRestant.Minutes + ":" + tempsRestant.Seconds);
                 Console.ResetColor();
-                Console.WriteLine("Score : " + jeu.Joueurs[(i % 2)].Score + "\n");
+                Console.Write("Score : ");
+                Console.ForegroundColor = ConsoleColor.Yellow; 
+                Console.WriteLine(jeu.Joueurs[(i % 2)].Score + "\n");
+                Console.ResetColor();
                 Console.WriteLine(plateau.toString());
                 Console.ForegroundColor = ConsoleColor.Magenta;
                 string mot = Console.ReadLine().ToUpper();
@@ -90,7 +117,9 @@ class Program
             {
                 motsTrouves.Add(jeu.Joueurs[(i % 2)].Mots[j]);
             }
+            
         }
+
         Console.Clear();
         Console.WriteLine(jeu.Joueurs[0].toString());
         Console.WriteLine(jeu.Joueurs[1].toString());
@@ -122,7 +151,6 @@ class Program
             {
                 motsTrouvesFrequence[item] = 1;
             }
-            //a verif si fonctionne vrmt
         }
 
         NuageDeMots.Affichage(motsTrouvesFrequence);

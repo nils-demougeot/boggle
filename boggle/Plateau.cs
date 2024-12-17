@@ -38,6 +38,7 @@ public class Plateau
         string output = "";
         for (int i = 0; i < this.taille; i++)
         {
+            Console.Write("  ");
             for (int j = 0; j < this.taille; j++)
             {
                 Console.Write(this.facesVisibles[i, j] + " ");

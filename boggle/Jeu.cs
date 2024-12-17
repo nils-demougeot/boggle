@@ -33,11 +33,29 @@ public class Jeu
     public string SaisirNom(int j)
     {
         Console.Write("Nom du joueur " + j + " : ");
+        if (j == 1)
+        {
+            Console.ForegroundColor = ConsoleColor.Blue;
+        } else
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+        }
         string saisie = Console.ReadLine();
+        Console.ResetColor();
+
         while (string.IsNullOrWhiteSpace(saisie))
         {
             Console.Write("Saisie incorrecte, veuillez réessayer : ");
+            if (j == 1)
+            {
+                Console.ForegroundColor = ConsoleColor.Blue;
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+            }
             saisie = Console.ReadLine();
+            Console.ResetColor();
         }
         return saisie;
     }
