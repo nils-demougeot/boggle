@@ -60,22 +60,8 @@ public class IA
                 TimeSpan duree = TimeSpan.FromSeconds(15 / difficulte);
                 DateTime debut = DateTime.Now;
 
-                while (this.jeu.Minuteur(duree, debut) > TimeSpan.Zero)
-                {
-                    for (int i = 0; i < mot.Length; i++)
-                    {
-                        for (int m = 0; m < mots.Count; m++)
-                        {
-                            TimeSpan dureeTry = TimeSpan.FromSeconds(0.05 + random.NextDouble() * (0.4 - 0.05));
-                            DateTime debutTry = DateTime.Now;
-                            Console.Write(mots[m][i]);
-                            while (this.jeu.Minuteur(dureeTry, debutTry) > TimeSpan.Zero) { }
-                        }
-                        Console.Write("\r");
-                        Console.Write("-> ");
-                    }
-                }
-                Console.Write("-> ");
+                while (this.jeu.Minuteur(duree, debut) > TimeSpan.Zero) { }
+
                 for (int i = 0; i < mot.Length; i++)
                 {
                     TimeSpan dureeTyping = TimeSpan.FromSeconds(0.05 + random.NextDouble() * (0.4 - 0.05));
