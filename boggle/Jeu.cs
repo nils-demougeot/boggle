@@ -32,12 +32,14 @@ public class Jeu
     /// <returns>Retourne le nom saisi dans la console par le joueur</returns>
     public string SaisirNom(int j)
     {
-        Console.Write("Nom du joueur " + j + " : ");
+        Console.Write("Nom du joueur " + j);
         if (j == 1)
         {
+            Console.Write(" : ");
             Console.ForegroundColor = ConsoleColor.Blue;
         } else
         {
+            Console.Write(" (écrivez ia si vous voulez jouer contre l'ia) : ");
             Console.ForegroundColor = ConsoleColor.Red;
         }
         string saisie = Console.ReadLine();

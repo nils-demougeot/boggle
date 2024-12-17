@@ -25,10 +25,15 @@ class Program
         Console.Write("Nombre de manche par joueur : ");
         Console.ForegroundColor = ConsoleColor.Yellow;
         int nbTours = Convert.ToInt32(Console.ReadLine()) * 2;
+        bool vsIA = false;
         Console.ResetColor();
         Jeu jeu = new Jeu(nbTours * 60);
         Joueur j1 = new Joueur(jeu.SaisirNom(1));
         Joueur j2 = new Joueur(jeu.SaisirNom(2));
+        if (j2.Nom.ToUpper() == "IA")
+        {
+            vsIA = true;
+        }
         Joueur[] joueurs = new Joueur[2] { j1, j2 };
         jeu.Joueurs = joueurs;
         TimeSpan duree = TimeSpan.FromSeconds(nbTours * 60);
@@ -44,6 +49,7 @@ class Program
         Console.ResetColor();
         List<string> motsTrouves = new List<string>();
         De[,] des = new De[taille, taille];
+
         for (int x = 0; x < taille; x++)
         {
             for (int y = 0; y < taille; y++)
@@ -71,6 +77,16 @@ class Program
             DateTime debutManche = DateTime.Now;
             
             Plateau plateau = new Plateau(des, dico);
+            if (vsIA && (i % 2) == 1)
+            {
+                IA ia = new IA(plateau, dico, jeu, 1);
+                ia.Jouer();
+                for (int j = 0; j < jeu.Joueurs[(i % 2)].Mots.Count; j++)
+                {
+                    motsTrouves.Add(jeu.Joueurs[(i % 2)].Mots[j]);
+                }
+                continue;
+            }
             while (jeu.Minuteur(dureeManche, debutManche) > TimeSpan.Zero)
             {
                 // Console.Clear();
@@ -102,6 +118,7 @@ class Program
                 Console.WriteLine(jeu.Joueurs[(i % 2)].Score + "\n");
                 Console.ResetColor();
                 Console.WriteLine(plateau.toString());
+                Console.Write("-> ");
                 Console.ForegroundColor = ConsoleColor.Magenta;
                 string mot = Console.ReadLine().ToUpper();
                 Console.ResetColor();
@@ -154,7 +171,7 @@ class Program
         }
 
         NuageDeMots.Affichage(motsTrouvesFrequence);
-
+        Console.ReadLine();
 
 
     }
