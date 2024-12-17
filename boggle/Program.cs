@@ -30,9 +30,12 @@ class Program
         Jeu jeu = new Jeu(nbTours * 60);
         Joueur j1 = new Joueur(jeu.SaisirNom(1));
         Joueur j2 = new Joueur(jeu.SaisirNom(2));
+        int difficulte = 1;
         if (j2.Nom.ToUpper() == "IA")
         {
             vsIA = true;
+            Console.Write("Niveau de difficulté de l'IA [1, 2, 3] : ");
+            difficulte = Convert.ToInt32(Console.ReadLine());
         }
         Joueur[] joueurs = new Joueur[2] { j1, j2 };
         jeu.Joueurs = joueurs;
@@ -79,7 +82,7 @@ class Program
             Plateau plateau = new Plateau(des, dico);
             if (vsIA && (i % 2) == 1)
             {
-                IA ia = new IA(plateau, dico, jeu, 1);
+                IA ia = new IA(plateau, dico, jeu, difficulte);
                 ia.Jouer();
                 for (int j = 0; j < jeu.Joueurs[(i % 2)].Mots.Count; j++)
                 {
@@ -153,6 +156,7 @@ class Program
         {
             Console.WriteLine("Ex-aequo !");
         }
+        Console.WriteLine("Appuyez sur ENTREE pour afficher le nuage de mots");
         Console.ReadLine();
 
 
