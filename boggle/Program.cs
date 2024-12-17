@@ -69,10 +69,15 @@ class Program
                 Console.WriteLine(jeu.Joueurs[(i % 2)].Nom);
                 Console.ResetColor();
                 TimeSpan tempsRestant = jeu.Minuteur(dureeManche, debutManche);
-                Console.WriteLine("Temps restant : " + tempsRestant.Minutes + ":" + tempsRestant.Seconds);
+                Console.Write("Temps restant : ");
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine(tempsRestant.Minutes + ":" + tempsRestant.Seconds);
+                Console.ResetColor();
                 Console.WriteLine("Score : " + jeu.Joueurs[(i % 2)].Score + "\n");
                 Console.WriteLine(plateau.toString());
+                Console.ForegroundColor = ConsoleColor.Magenta;
                 string mot = Console.ReadLine().ToUpper();
+                Console.ResetColor();
                 string res = plateau.Test_Plateau(mot, jeu.Joueurs[(i % 2)]);
                 Console.WriteLine(res);
                 if (res == "Mot valide")
