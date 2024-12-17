@@ -44,7 +44,6 @@ public class De
                 }
             }
         }
-        // LancerDe(r);
     }
 
 
