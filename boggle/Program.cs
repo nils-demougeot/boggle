@@ -149,10 +149,22 @@ class Program
                 string mot = Console.ReadLine().ToUpper().Trim();
                 Console.ResetColor();
                 string res = plateau.Test_Plateau(mot, jeu.Joueurs[(i % 2)]);
-                Console.WriteLine(res);
+                
+                
                 if (res == "Mot valide")
                 {
+                    Console.ForegroundColor = ConsoleColor.DarkGreen;
+                    Console.Write(" "+res+" ");
+                    Console.ResetColor();
+                    Console.WriteLine();
+
                     jeu.UpdateScore((i % 2), mot);
+                } else
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    Console.Write(" " + res + " ");
+                    Console.ResetColor();
+                    Console.WriteLine();
                 }
             }
             for (int j = 0; j < jeu.Joueurs[(i % 2)].Mots.Count; j++)
