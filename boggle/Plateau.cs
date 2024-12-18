@@ -110,10 +110,10 @@ public class Plateau
     /// Fonction récursive vérifiant si le mot entré en paramètre est bien présent sur le plateau 
     /// en respectant les règles d'adjacence du boggle
     /// </summary>
-    /// <param name="x">La position en x sur la plateau ectuellement vérifiée</param>
+    /// <param name="x">La position en x sur la plateau actuellement vérifiée</param>
     /// <param name="y">La position en y sur le plateau actuellement vérifiée</param>
     /// <param name="mot">Le mot à vérifier sur le plateau</param>
-    /// <param name="index">Le rang de la lettre du mot actuellement vérifiée</param>
+    /// <param name="index">Le rang de la lettre du mot ectuellement vérifiée</param>
     /// <param name="visited">Matrice de booléens de la taille du plateau indiquant pour chaque lettre si elle a déjà été visitée</param>
     /// <returns>True si le mot est présent sur le plateau, False sinon</returns>
     private bool RechercherMot(int x, int y, string mot, int index, bool[,] visited)
@@ -122,7 +122,7 @@ public class Plateau
         {
             return true;
         }
-        if (x < 0 || y < 0 || x >= taille || y >= taille)
+        if (x < 0 || y < 0 || x >= this.taille || y >= this.taille)
         {
             return false;
         }

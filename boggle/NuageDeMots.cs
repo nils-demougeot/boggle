@@ -10,12 +10,12 @@ namespace boggle
 {
     public class NuageDeMots
     {
-        public void CreerNuageDeMots(Dictionary<string, int> wordFrequencies, string outputPath, int canvasWidth = 800, int canvasHeight = 600)
+        public void CreerNuageDeMots(Dictionary<string, int> wordFrequencies, string outputPath, int numJoueur, int canvasWidth = 800, int canvasHeight = 600)
         {
             // Validate inputs
             if (wordFrequencies == null || !wordFrequencies.Any())
             {
-                throw new ArgumentException("Word frequencies dictionary is empty or null.");
+                throw new ArgumentException("Auncun mot trouvé par le joueur");
             }
 
             // Create a SkiaSharp surface
@@ -23,7 +23,13 @@ namespace boggle
             using var canvas = new SKCanvas(bitmap);
 
             // Clear the canvas with a white background
-            canvas.Clear(SKColors.White);
+            if (numJoueur == 1)
+            {
+                canvas.Clear(new SKColor(222, 235, 255));
+            } else
+            {
+                canvas.Clear(new SKColor(255, 220, 220));
+            }
 
             // Prepare variables
             Random random = new Random();
@@ -65,17 +71,21 @@ namespace boggle
             using var stream = System.IO.File.OpenWrite(outputPath);
             data.SaveTo(stream);
 
-            Console.Write("Nuage de mot sauvegardé à /bin/debug/net6.0/");
-            Console.WriteLine(outputPath);
+            Console.WriteLine("Nuage de mot du joueur "+ numJoueur + " sauvegardé à /bin/debug/net6.0/"+outputPath);
         }
+        
 
-        static public void Affichage(Dictionary<string, int> motsTrouvesFrequence)
+        static public void Affichage(Dictionary<string, int> motsTrouvesJ1, Dictionary<string, int> motsTrouvesJ2)
         {
+            NuageDeMots NuageJoueur1 = new NuageDeMots();
+            NuageJoueur1.CreerNuageDeMots(motsTrouvesJ1, "NuageJoueur1.png", 1);
 
-            string outputPath = "nuageDeMots.png"; // Chemin pour enregistrer l'image de sortie
-            NuageDeMots generator = new NuageDeMots();
-            generator.CreerNuageDeMots(motsTrouvesFrequence, outputPath);
-            Process.Start(new ProcessStartInfo(outputPath) { UseShellExecute = true });
+            NuageDeMots NuageJoueur2 = new NuageDeMots();
+            NuageJoueur2.CreerNuageDeMots(motsTrouvesJ2, "NuageJoueur2.png", 2);
+
+
+            Process.Start(new ProcessStartInfo("NuageJoueur1.png") { UseShellExecute = true });
+            Process.Start(new ProcessStartInfo("NuageJoueur2.png") { UseShellExecute = true });
         }
     }
 }

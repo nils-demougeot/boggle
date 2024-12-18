@@ -1,24 +1,13 @@
 ﻿using boggle;
 using System;
+using System.Numerics;
 using System.Runtime.CompilerServices;
 
 class Program
 {
     public static void Main(string[] args)
     {
-
-        /*string asciiArt =
-" ___                 _      \n" +
-"| . > ___  ___  ___ | | ___ \n" +
-"| . \\/ . \\/ . |/ . || |/ ._>\n" +
-"|___/\\___/\\_. |\\_. ||_|\\___.\n" +
-"          <___'<___'        \n" +
-" _          _ _  _  _       _     ___             \n" +
-"| |_  _ _  | \\ |<_>| | ___ < >   |_ _| ___ ._ _ _ \n" +
-"| . \\| | | |   || || |<_-< /.\\/   | | / . \\| ' ' |\n" +
-"|___/`_. | | \\_||_||_|/__/ \\_/\\   |_| \\___/|_|_|_|\n" +
-"     <___'                                         \n\n";*/
-
+        #region Bannière ASCII art
         string asciiArt =
 "██████╗  ██████╗  ██████╗  ██████╗ ██╗     ███████╗\n" +
 "██╔══██╗██╔═══██╗██╔════╝ ██╔════╝ ██║     ██╔════╝\n" +
@@ -33,23 +22,34 @@ class Program
 "██║╚██╗██║██║██║     ╚════██║     ██╔██╗        ██║   ██║   ██║██║╚██╔╝██║\n" +
 "██║ ╚████║██║███████╗███████║    ██╔╝ ██╗       ██║   ╚██████╔╝██║ ╚═╝ ██║\n" +
 "╚═╝  ╚═══╝╚═╝╚══════╝╚══════╝    ╚═╝  ╚═╝       ╚═╝    ╚═════╝ ╚═╝     ╚═╝\n";
-                                                                          
-
 
         Console.ForegroundColor = ConsoleColor.White;
         Console.WriteLine(asciiArt);
         Console.ResetColor();
-        Console.Write("\nNombre de manche par joueur : ");
+        #endregion
+
+        #region Lecture nombre de manches
+        Console.Write("\nNombre de manche par joueur ");
+        Console.ForegroundColor = ConsoleColor.DarkGray;
+        Console.Write("(3 si laissé vide)");
+        Console.ResetColor();
+        Console.Write(" : ");
+
         Console.ForegroundColor = ConsoleColor.Yellow;
 
-        int nbTours = 1;
+        int nbTours = 3*2;
         string entreeNbTours;
         bool estValideNbTours = false;
         while (!estValideNbTours)
         {
             entreeNbTours = Console.ReadLine();
             Console.ResetColor();
-            if (entreeNbTours != null && int.TryParse(entreeNbTours, out nbTours) && nbTours >= 1)
+            if (entreeNbTours == "")
+            {
+                nbTours = 3*2;
+                estValideNbTours = true;
+            }
+            else if (int.TryParse(entreeNbTours, out nbTours) && nbTours >= 1)
             {
                 estValideNbTours = true;
                 nbTours = nbTours * 2;
@@ -57,10 +57,12 @@ class Program
             else
             {
                 Console.WriteLine("Entrée invalide. Veuillez réessayer.");
-                Console.Write("Nombre de manche par joueur : ");
+                Console.Write("Nombre de manche par joueur (3 si laissé vide) : ");
             }
         }
+        #endregion
 
+        #region Lecture noms joueurs et IA
         bool vsIA = false;
         Jeu jeu = new Jeu(nbTours * 60);
         Console.WriteLine();
@@ -72,7 +74,12 @@ class Program
         if (j2.Nom.ToUpper() == "IA")
         {
             vsIA = true;
-            Console.Write("\nNiveau de difficulté de l'IA [1, 2, 3] : ");
+            Console.Write("\nNiveau de difficulté de l'IA [1, 2, 3] ");
+            Console.ForegroundColor = ConsoleColor.DarkGray;
+            Console.Write("(1 si laissé vide)");
+            Console.ResetColor();
+            Console.Write(" : ");
+
             Console.ForegroundColor = ConsoleColor.Yellow;
             
             string entreeDifficulte;
@@ -81,8 +88,12 @@ class Program
             {
                 entreeDifficulte = Console.ReadLine();
                 Console.ResetColor();
-
-                if (entreeDifficulte != null && int.TryParse(entreeDifficulte, out difficulte) && difficulte >= 1 && difficulte <= 3)
+                if (entreeDifficulte == "")
+                {
+                    difficulte = 1;
+                    estValideDifficulte = true;
+                }
+                else if (int.TryParse(entreeDifficulte, out difficulte) && difficulte >= 1 && difficulte <= 3)
                 {
                     estValideDifficulte = true;
                 }
@@ -98,7 +109,14 @@ class Program
         TimeSpan duree = TimeSpan.FromSeconds(nbTours * 60);
         DateTime debut = DateTime.Now;
         Random r = new Random();
-        Console.Write("\nTaille du plateau : ");
+        #endregion
+
+        #region Lecture taille plateau
+        Console.Write("\nTaille du plateau ");
+        Console.ForegroundColor = ConsoleColor.DarkGray;
+        Console.Write("(6 si laissé vide)");
+        Console.ResetColor();
+        Console.Write(" : ");
         Console.ForegroundColor = ConsoleColor.Yellow;
 
         int taille = 6;
@@ -108,25 +126,43 @@ class Program
         {
             entreeTaille = Console.ReadLine();
             Console.ResetColor();
-            if (entreeTaille != null && int.TryParse(entreeTaille, out taille) && taille > 1)
+            if (entreeTaille == "")
+            {
+                taille = 6;
+                estValideTaille = true;
+            }
+            else if (int.TryParse(entreeTaille, out taille) && taille > 1)
             {
                 estValideTaille = true;
             }
             else
             {
                 Console.WriteLine("Entrée invalide. Veuillez réessayer.");
-                Console.Write("Taille du plateau : ");
+                Console.Write("Taille du plateau (6 si laissé vide) : ");
             }
         }
+        #endregion
 
-        Console.Write("\nLangue (\"fr\" ou \"en\") : ");
+        #region Lecture langue dictionnaire
+        Console.Write("\nLangue \"fr\" ou \"en\" ");
+        Console.ForegroundColor = ConsoleColor.DarkGray;
+        Console.Write("(\"fr\" si laissé vide)");
+        Console.ResetColor();
+        Console.Write(" : ");
+
         string langue = "fr";
         bool estValideLangue = false;
+        Console.ForegroundColor = ConsoleColor.Yellow;
         while (!estValideLangue)
         {
             langue = Console.ReadLine();
             Console.ResetColor();
-            if (langue != null && (langue.ToUpper() == "FR" || langue.ToUpper() == "EN"))
+            if (langue == "")
+            {
+                langue = "fr";
+                estValideLangue = true;
+            }
+            else if (langue.ToLower() == "fr" || langue.ToLower() == "en")
             {
                 estValideLangue = true;
             }
@@ -136,10 +172,10 @@ class Program
                 Console.Write("Langue (\"fr\" ou \"en\") : ");
             }
         }
+        #endregion
 
-        Console.ForegroundColor = ConsoleColor.Yellow;
-        Dictionnaire dico = new Dictionnaire(langue);
-        Console.ResetColor();
+        #region Creation de la partie et execution des manches successives
+        Dictionnaire dico = new Dictionnaire(langue.ToLower());
         List<string> motsTrouves = new List<string>();
         De[,] des = new De[taille, taille];
 
@@ -154,11 +190,11 @@ class Program
         {
             if (i%2 == 0)
             {
-                Console.WriteLine("\n\n||----------- TOUR " + Convert.ToInt32((i)/2+1) + " -----------||");
+                Console.WriteLine("\n\n||────────────── TOUR " + Convert.ToInt32((i)/2+1) + " ──────────────||");
             }
 
             Console.ForegroundColor = ConsoleColor.DarkGray;
-            Console.Write("\n||----------- À ");
+            Console.Write("\n|───────── À ");
             if (i % 2 == 0)
             {
                 Console.ForegroundColor = ConsoleColor.Blue;
@@ -169,7 +205,7 @@ class Program
             }
             Console.Write(jeu.Joueurs[(i % 2)].Nom);
             Console.ForegroundColor = ConsoleColor.DarkGray;
-            Console.WriteLine(" de jouer -----------||");
+            Console.WriteLine(" de jouer ─────────|");
             Console.ResetColor();
 
             jeu.Joueurs[(i % 2)].Mots = new List<string>();
@@ -227,27 +263,35 @@ class Program
                 
                 if (res == "Mot valide")
                 {
+                    Console.Write("  ");
+                    Console.BackgroundColor = ConsoleColor.White;
                     Console.ForegroundColor = ConsoleColor.DarkGreen;
-                    Console.Write(" "+res+" ");
+                    Console.Write(" + ");
                     Console.ResetColor();
-                    Console.WriteLine();
+
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine(" "+res+" ");
+                    Console.ResetColor();
 
                     jeu.UpdateScore((i % 2), mot);
                 } else
                 {
+                    Console.Write("  ");
+                    Console.BackgroundColor = ConsoleColor.White;
                     Console.ForegroundColor = ConsoleColor.DarkRed;
-                    Console.Write(" " + res + " ");
+                    Console.Write(" - ");
                     Console.ResetColor();
-                    Console.WriteLine();
+
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine(" " + res + " ");
+                    Console.ResetColor();
                 }
-            }
-            for (int j = 0; j < jeu.Joueurs[(i % 2)].Mots.Count; j++)
-            {
-                motsTrouves.Add(jeu.Joueurs[(i % 2)].Mots[j]);
             }
             
         }
+        #endregion
 
+        #region Affichage des scores
         Console.Clear();
 
         Console.WriteLine(jeu.Joueurs[0].toString());
@@ -280,28 +324,42 @@ class Program
         Console.ForegroundColor = ConsoleColor.DarkYellow;
         Console.Write("ENTREE");
         Console.ForegroundColor = ConsoleColor.Yellow;
-        Console.WriteLine(" pour afficher le nuage de mots");
+        Console.WriteLine(" pour afficher les nuages de mots");
         Console.ResetColor();
         Console.ReadLine();
+        #endregion
 
-
-
-        Dictionary<string, int> motsTrouvesFrequence = new Dictionary<string, int>();
-        foreach (var item in motsTrouves)
+        #region Appel methode création nuage de mots
+        Dictionary<string, int> motsTrouvesFrequenceJ1 = new Dictionary<string, int>();
+        foreach (var mot in jeu.Joueurs[0].Mots)
         {
-            if (motsTrouvesFrequence.ContainsKey(item))
+            if (motsTrouvesFrequenceJ1.ContainsKey(mot))
             {
-                motsTrouvesFrequence[item]++;
+                motsTrouvesFrequenceJ1[mot]++;
             }
             else
             {
-                motsTrouvesFrequence[item] = 1;
+                motsTrouvesFrequenceJ1[mot] = 1;
             }
         }
 
-        NuageDeMots.Affichage(motsTrouvesFrequence);
-        Console.ReadLine();
+        Dictionary<string, int> motsTrouvesFrequenceJ2 = new Dictionary<string, int>();
+        foreach (var mot in jeu.Joueurs[1].Mots)
+        {
+            if (motsTrouvesFrequenceJ2.ContainsKey(mot))
+            {
+                motsTrouvesFrequenceJ2[mot]++;
+            }
+            else
+            {
+                motsTrouvesFrequenceJ2[mot] = 1;
+            }
+        }
 
+        NuageDeMots.Affichage(motsTrouvesFrequenceJ1, motsTrouvesFrequenceJ2);
+        #endregion
+
+        Console.ReadLine();
 
     }
 }

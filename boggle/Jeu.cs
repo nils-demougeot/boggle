@@ -26,9 +26,9 @@ public class Jeu
 
     #region Saisie Nom
     /// <summary>
-    /// Demande � l'utilisateur de saisir son nom de joueur dans la console et enregistre cette chaine de caract�re
+    /// Demande à l'utilisateur de saisir son nom de joueur dans la console et enregistre cette chaine de caract�re
     /// </summary>
-    /// <param name="j">Le num�ro du joueur (1 ou 2)</param>
+    /// <param name="j">Le numéro du joueur (1 ou 2)</param>
     /// <returns>Retourne le nom saisi dans la console par le joueur</returns>
     public string SaisirNom(int j)
     {
@@ -47,7 +47,7 @@ public class Jeu
 
         while (string.IsNullOrWhiteSpace(saisie))
         {
-            Console.Write("Saisie incorrecte, veuillez r�essayer : ");
+            Console.Write("Saisie incorrecte, veuillez réessayer : ");
             if (j == 1)
             {
                 Console.ForegroundColor = ConsoleColor.Blue;
@@ -98,12 +98,12 @@ public class Jeu
     }
     #endregion
 
-    #region Mise � jour du score
+    #region Mise à jour du score
     /// <summary>
-    /// Met � jour le score du joueur en fonction du mot entr�
+    /// Met à jour le score du joueur en fonction du mot entré
     /// </summary>
-    /// <param name="j">Num�ro du joueur (0 �tant le premier joueur et 1 le second)</param>
-    /// <param name="mot">Mot entr� par le joueur, pr�c�demment v�rifi�</param>
+    /// <param name="j">Numéro du joueur (0 étant le premier joueur et 1 le second)</param>
+    /// <param name="mot">Mot entré par le joueur, précédemment vérifié</param>
     public void UpdateScore(int j, string mot)
     {
         mot = mot.ToUpper();

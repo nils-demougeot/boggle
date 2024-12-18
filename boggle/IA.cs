@@ -54,7 +54,7 @@ public class IA
             Console.Write("  "); // Dessine un espace color�
             Console.ResetColor();
 
-            // Affiche le mot � droite
+            // Affiche le mot à droite
             Console.SetCursorPosition(textPositionX, bottomLine);
             Console.ForegroundColor = ConsoleColor.DarkGray;
             Console.Write("L'IA teste les mots... ");
@@ -62,7 +62,7 @@ public class IA
             
             Console.Write(mot);
             Console.ResetColor();
-            // Mise � jour des indices
+            // Mise à jour des indices
             colorIndex = (colorIndex + 1) % colors.Length; // Cycle des couleurs
 
             Random afficherCeMot = new Random();
