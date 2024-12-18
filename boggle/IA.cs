@@ -66,9 +66,9 @@ public class IA
             colorIndex = (colorIndex + 1) % colors.Length; // Cycle des couleurs
 
             Random afficherCeMot = new Random();
-            if (afficherCeMot.Next(0,2) == 0)
+            if (afficherCeMot.Next(0,5) == 0)
             {
-                Thread.Sleep(200/difficulte);
+                Thread.Sleep(20*(this.plateau.Taille**3)/difficulte);
             }
             
 
@@ -100,7 +100,7 @@ public class IA
 
 
                 Console.Write("-> ");
-                Console.ForegroundColor = ConsoleColor.Magenta;
+                Console.ForegroundColor = ConsoleColor.Yellow;
 
                 Thread.Sleep(500);
                 for (int i = 0; i < mot.Length; i++)

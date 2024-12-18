@@ -145,7 +145,7 @@ class Program
                 Console.WriteLine(plateau.toString());
 
                 Console.Write("-> ");
-                Console.ForegroundColor = ConsoleColor.Magenta;
+                Console.ForegroundColor = ConsoleColor.Yellow;
                 string mot = Console.ReadLine().ToUpper().Trim();
                 Console.ResetColor();
                 string res = plateau.Test_Plateau(mot, jeu.Joueurs[(i % 2)]);

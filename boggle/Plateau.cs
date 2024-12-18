@@ -28,6 +28,11 @@ public class Plateau
         }
     }
 
+    public int Taille
+    {
+        get { return taille; }
+    }
+
     #region Description du plateau
     /// <summary>
     /// Renvoie le plateau actuel de telle sorte qu'il soit lisible, sous forme d'un carré de lettres
