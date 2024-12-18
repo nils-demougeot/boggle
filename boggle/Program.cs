@@ -41,20 +41,55 @@ class Program
         Console.ResetColor();
         Console.Write("Nombre de manche par joueur : ");
         Console.ForegroundColor = ConsoleColor.Yellow;
-        int nbTours = Convert.ToInt32(Console.ReadLine()) * 2;
+
+        int nbTours = 1;
+        string entreeNbTours;
+        bool estValideNbTours = false;
+        while (!estValideNbTours)
+        {
+            entreeNbTours = Console.ReadLine();
+            Console.ResetColor();
+            if (entreeNbTours != null && int.TryParse(entreeNbTours, out nbTours) && nbTours >= 1)
+            {
+                estValideNbTours = true;
+                nbTours = nbTours * 2;
+            }
+            else
+            {
+                Console.WriteLine("Entrée invalide. Veuillez réessayer.");
+                Console.Write("Nombre de manche par joueur : ");
+            }
+        }
+
         bool vsIA = false;
-        Console.ResetColor();
         Jeu jeu = new Jeu(nbTours * 60);
         Joueur j1 = new Joueur(jeu.SaisirNom(1));
         Joueur j2 = new Joueur(jeu.SaisirNom(2));
+
         int difficulte = 1;
         if (j2.Nom.ToUpper() == "IA")
         {
             vsIA = true;
             Console.Write("Niveau de difficulté de l'IA [1, 2, 3] : ");
             Console.ForegroundColor = ConsoleColor.Yellow;
-            difficulte = Convert.ToInt32(Console.ReadLine());
-            Console.ResetColor();
+            
+            string entreeDifficulte;
+            bool estValideDifficulte = false;
+            while (!estValideDifficulte)
+            {
+                entreeDifficulte = Console.ReadLine();
+                Console.ResetColor();
+
+                if (entreeDifficulte != null && int.TryParse(entreeDifficulte, out difficulte) && difficulte >= 1 && difficulte <= 3)
+                {
+                    estValideDifficulte = true;
+                }
+                else
+                {
+                    Console.WriteLine("Entrée invalide. Veuillez réessayer.");
+                    Console.Write("Niveau de difficulté de l'IA [1, 2, 3] : ");
+                }
+            }
         }
         Joueur[] joueurs = new Joueur[2] { j1, j2 };
         jeu.Joueurs = joueurs;
@@ -63,8 +98,26 @@ class Program
         Random r = new Random();
         Console.Write("Taille du plateau : ");
         Console.ForegroundColor = ConsoleColor.Yellow;
-        int taille = Convert.ToInt32(Console.ReadLine());
-        Console.ResetColor();
+
+        int taille = 6;
+        string entreeTaille;
+        bool estValideTaille = false;
+        while (!estValideTaille)
+        {
+            entreeTaille = Console.ReadLine();
+            Console.ResetColor();
+            if (entreeTaille != null && int.TryParse(entreeTaille, out taille) && taille > 1)
+            {
+                estValideTaille = true;
+            }
+            else
+            {
+                Console.WriteLine("Entrée invalide. Veuillez réessayer.");
+                Console.Write("Taille du plateau : ");
+            }
+        }
+
+        
         Console.Write("Langue (\"fr\" ou \"en\") : ");
         Console.ForegroundColor = ConsoleColor.Yellow;
         Dictionnaire dico = new Dictionnaire(Console.ReadLine());
