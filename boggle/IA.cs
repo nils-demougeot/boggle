@@ -25,19 +25,62 @@ public class IA
         List<string> mots = new List<string>();
         TimeSpan dureeIA = TimeSpan.FromSeconds(60);
         DateTime debutIA = DateTime.Now;
+
+        // Couleurs pour la "case" clignotante
+        ConsoleColor[] colors = { ConsoleColor.Red, ConsoleColor.Green, ConsoleColor.Yellow, ConsoleColor.Blue, ConsoleColor.Cyan, ConsoleColor.Magenta, ConsoleColor.DarkYellow };
+        int colorIndex = 0;
+
+        // Positionnement initial
+        int bottomLine = Console.WindowHeight - 1; // Dernière ligne visible
+        int boxPositionX = 1; // Position horizontale de la case
+        int textPositionX = 4; // Position horizontale du mot
+
+        
+
         while (jeu.Minuteur(dureeIA, debutIA) > TimeSpan.Zero)
         {
+            Console.SetCursorPosition(0, bottomLine); // Va tout en bas de la console
+            Console.Write(new string(' ', Console.WindowWidth)); // Efface la ligne
             Random random = new Random();
             int r = random.Next(dico.Mots.Length);
             string mot = dico.Mots[r];
             mots.Add(mot);
+
+            
+
+            // Affiche la case clignotante
+            Console.SetCursorPosition(boxPositionX, bottomLine);
+            Console.BackgroundColor = colors[colorIndex]; // Change la couleur de fond
+            Console.Write("  "); // Dessine un espace coloré
+            Console.ResetColor();
+
+            // Affiche le mot à droite
+            Console.SetCursorPosition(textPositionX, bottomLine);
+            Console.ForegroundColor = ConsoleColor.DarkGray;
+            Console.Write("L'IA teste les mots... ");
+            Console.ForegroundColor = colors[colorIndex];
+            
+            Console.Write(mot);
+            Console.ResetColor();
+            // Mise à jour des indices
+            colorIndex = (colorIndex + 1) % colors.Length; // Cycle des couleurs
+
+            Random afficherCeMot = new Random();
+            if (afficherCeMot.Next(0,2) == 0)
+            {
+                Thread.Sleep(200/difficulte);
+            }
+            
+
             if (plateau.Test_Plateau(mot, this.jeu.Joueurs[1]) == "Mot valide")
             {
+                Console.SetCursorPosition(0, bottomLine); // Va tout en bas de la console
+                Console.Write(new string(' ', Console.WindowWidth));
+
                 this.jeu.UpdateScore(1, mot);
                 
 
                 Console.WriteLine();
-                Console.ResetColor();
 
                 Console.Write("C'est au tour de ");
                 Console.ForegroundColor = ConsoleColor.Red;
@@ -55,13 +98,11 @@ public class IA
                 Console.ResetColor();
                 Console.WriteLine(plateau.toString());
 
+
                 Console.Write("-> ");
                 Console.ForegroundColor = ConsoleColor.Magenta;
-                TimeSpan duree = TimeSpan.FromSeconds(15 / difficulte);
-                DateTime debut = DateTime.Now;
 
-                while (this.jeu.Minuteur(duree, debut) > TimeSpan.Zero) { }
-
+                Thread.Sleep(500);
                 for (int i = 0; i < mot.Length; i++)
                 {
                     TimeSpan dureeTyping = TimeSpan.FromSeconds(0.05 + random.NextDouble() * (0.4 - 0.05));
@@ -71,7 +112,7 @@ public class IA
                 }
                 Console.WriteLine();
                 Console.ResetColor();
-                Console.WriteLine("Mot Valide");
+                Console.WriteLine("Mot Valide\n\n");
 
 
 

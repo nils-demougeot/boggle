@@ -7,7 +7,7 @@ class Program
     public static void Main(string[] args)
     {
 
-        string asciiArt =
+        /*string asciiArt =
 " ___                 _      \n" +
 "| . > ___  ___  ___ | | ___ \n" +
 "| . \\/ . \\/ . |/ . || |/ ._>\n" +
@@ -17,9 +17,26 @@ class Program
 "| |_  _ _  | \\ |<_>| | ___ < >   |_ _| ___ ._ _ _ \n" +
 "| . \\| | | |   || || |<_-< /.\\/   | | / . \\| ' ' |\n" +
 "|___/`_. | | \\_||_||_|/__/ \\_/\\   |_| \\___/|_|_|_|\n" +
-"     <___'                                         \n\n";
+"     <___'                                         \n\n";*/
 
-        Console.ForegroundColor = ConsoleColor.DarkGreen;
+        string asciiArt =
+"██████╗  ██████╗  ██████╗  ██████╗ ██╗     ███████╗\n" +
+"██╔══██╗██╔═══██╗██╔════╝ ██╔════╝ ██║     ██╔════╝\n" +
+"██████╔╝██║   ██║██║  ███╗██║  ███╗██║     █████╗\n" +
+"██╔══██╗██║   ██║██║   ██║██║   ██║██║     ██╔══╝  \n" +
+"██████╔╝╚██████╔╝╚██████╔╝╚██████╔╝███████╗███████╗ \n" +
+"╚═════╝  ╚═════╝  ╚═════╝  ╚═════╝ ╚══════╝╚══════╝ \n" +
+"                                                     \n" +
+"███╗   ██╗██╗██╗     ███████╗    ██╗  ██╗    ████████╗ ██████╗ ███╗   ███╗\n" +
+"████╗  ██║██║██║     ██╔════╝    ╚██╗██╔╝    ╚══██╔══╝██╔═══██╗████╗ ████║\n" +
+"██╔██╗ ██║██║██║     ███████╗     ╚███╔╝        ██║   ██║   ██║██╔████╔██║\n" +
+"██║╚██╗██║██║██║     ╚════██║     ██╔██╗        ██║   ██║   ██║██║╚██╔╝██║\n" +
+"██║ ╚████║██║███████╗███████║    ██╔╝ ██╗       ██║   ╚██████╔╝██║ ╚═╝ ██║\n" +
+"╚═╝  ╚═══╝╚═╝╚══════╝╚══════╝    ╚═╝  ╚═╝       ╚═╝    ╚═════╝ ╚═╝     ╚═╝\n";
+                                                                          
+
+
+        Console.ForegroundColor = ConsoleColor.White;
         Console.WriteLine(asciiArt);
         Console.ResetColor();
         Console.Write("Nombre de manche par joueur : ");
@@ -28,7 +45,6 @@ class Program
         bool vsIA = false;
         Console.ResetColor();
         Jeu jeu = new Jeu(nbTours * 60);
-        Console.Write("Noms des joueurs (écrivez \"ia\" si vous voulez jouer contre l'ia) : ");
         Joueur j1 = new Joueur(jeu.SaisirNom(1));
         Joueur j2 = new Joueur(jeu.SaisirNom(2));
         int difficulte = 1;
@@ -65,6 +81,11 @@ class Program
         }
         for (int i = 0; i < nbTours; i++)
         {
+            if (i%2 == 0)
+            {
+                Console.WriteLine("\n\n||----------- TOUR " + Convert.ToInt32((i)/2+1) + " -----------||");
+            }
+
             Console.ForegroundColor = ConsoleColor.DarkGray;
             Console.Write("\n||----------- À ");
             if (i % 2 == 0)
@@ -72,14 +93,16 @@ class Program
                 Console.ForegroundColor = ConsoleColor.Blue;
             }
             else
-            { Console.ForegroundColor = ConsoleColor.Red; }
+            { 
+                Console.ForegroundColor = ConsoleColor.Red; 
+            }
             Console.Write(jeu.Joueurs[(i % 2)].Nom);
             Console.ForegroundColor = ConsoleColor.DarkGray;
-            Console.WriteLine(" de jouer -----------||\n");
+            Console.WriteLine(" de jouer -----------||");
             Console.ResetColor();
 
             jeu.Joueurs[(i % 2)].Mots = new List<string>();
-            TimeSpan dureeManche = TimeSpan.FromSeconds(60);
+            TimeSpan dureeManche = TimeSpan.FromSeconds(5);//modif
             DateTime debutManche = DateTime.Now;
             
             Plateau plateau = new Plateau(des, dico);
@@ -95,10 +118,6 @@ class Program
             }
             while (jeu.Minuteur(dureeManche, debutManche) > TimeSpan.Zero)
             {
-                // Console.Clear();
-                // Console.ForegroundColor = ConsoleColor.DarkGreen;
-                // Console.WriteLine(asciiArt);
-                // Console.ResetColor(); 
                 Console.WriteLine();
                 Console.ResetColor();
 
@@ -124,9 +143,10 @@ class Program
                 Console.WriteLine(jeu.Joueurs[(i % 2)].Score + "\n");
                 Console.ResetColor();
                 Console.WriteLine(plateau.toString());
+
                 Console.Write("-> ");
                 Console.ForegroundColor = ConsoleColor.Magenta;
-                string mot = Console.ReadLine().ToUpper();
+                string mot = Console.ReadLine().ToUpper().Trim();
                 Console.ResetColor();
                 string res = plateau.Test_Plateau(mot, jeu.Joueurs[(i % 2)]);
                 Console.WriteLine(res);
@@ -143,22 +163,39 @@ class Program
         }
 
         Console.Clear();
+
         Console.WriteLine(jeu.Joueurs[0].toString());
         Console.WriteLine(jeu.Joueurs[1].toString());
+        Console.WriteLine();
         int gagnant = Array.IndexOf(jeu.Joueurs, Math.Max(jeu.Joueurs[0].Score, jeu.Joueurs[1].Score));
         if (jeu.Joueurs[0].Score > jeu.Joueurs[1].Score)
         {
-            Console.WriteLine(jeu.Joueurs[0].Nom + " a gagné !");
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.Write(jeu.Joueurs[0].Nom);
+            Console.ResetColor();
+
+            Console.WriteLine(" a gagné !");
         }
         else if (jeu.Joueurs[0].Score < jeu.Joueurs[1].Score) 
         {
-            Console.WriteLine(jeu.Joueurs[1].Nom + " a gagné !");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.Write(jeu.Joueurs[1].Nom);
+            Console.ResetColor();
+
+            Console.WriteLine(" a gagné !");
         }
         else
         {
             Console.WriteLine("Ex-aequo !");
         }
-        Console.WriteLine("Appuyez sur ENTREE pour afficher le nuage de mots");
+
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        Console.Write("\nAppuyez sur ");
+        Console.ForegroundColor = ConsoleColor.DarkYellow;
+        Console.Write("ENTREE");
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        Console.WriteLine(" pour afficher le nuage de mots");
+        Console.ResetColor();
         Console.ReadLine();
 
 

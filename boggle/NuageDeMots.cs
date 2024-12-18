@@ -2,10 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using static System.Net.Mime.MediaTypeNames;
 //dotnet add package SkiaSharp
 
 
@@ -69,13 +65,14 @@ namespace boggle
             using var stream = System.IO.File.OpenWrite(outputPath);
             data.SaveTo(stream);
 
-            Console.WriteLine($"Word cloud saved to {outputPath}");
+            Console.Write("Nuage de mot sauvegardé à /bin/debug/net6.0/");
+            Console.WriteLine(outputPath);
         }
 
         static public void Affichage(Dictionary<string, int> motsTrouvesFrequence)
         {
 
-            string outputPath = "wordcloud.png"; // Chemin pour enregistrer l'image de sortie
+            string outputPath = "nuageDeMots.png"; // Chemin pour enregistrer l'image de sortie
             NuageDeMots generator = new NuageDeMots();
             generator.CreerNuageDeMots(motsTrouvesFrequence, outputPath);
             Process.Start(new ProcessStartInfo(outputPath) { UseShellExecute = true });

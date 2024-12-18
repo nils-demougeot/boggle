@@ -39,7 +39,7 @@ public class Jeu
             Console.ForegroundColor = ConsoleColor.Blue;
         } else
         {
-            Console.Write(" : ");
+            Console.Write(" (Ecrire \"ia\" pour affronter l'IA) : ");
             Console.ForegroundColor = ConsoleColor.Red;
         }
         string saisie = Console.ReadLine();
