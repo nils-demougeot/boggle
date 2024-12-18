@@ -77,15 +77,29 @@ namespace boggle
 
         static public void Affichage(Dictionary<string, int> motsTrouvesJ1, Dictionary<string, int> motsTrouvesJ2)
         {
-            NuageDeMots NuageJoueur1 = new NuageDeMots();
-            NuageJoueur1.CreerNuageDeMots(motsTrouvesJ1, "NuageJoueur1.png", 1);
+            if (motsTrouvesJ1.Count != 0)
+            {
+                NuageDeMots NuageJoueur1 = new NuageDeMots();
+                NuageJoueur1.CreerNuageDeMots(motsTrouvesJ1, "NuageJoueur1.png", 1);
 
-            NuageDeMots NuageJoueur2 = new NuageDeMots();
-            NuageJoueur2.CreerNuageDeMots(motsTrouvesJ2, "NuageJoueur2.png", 2);
+                Process.Start(new ProcessStartInfo("NuageJoueur1.png") { UseShellExecute = true });
+            } else
+            {
+                Console.WriteLine("Aucun mot n'a été entré par le Joueur 1, pas de nuage de mots");
+            }
 
+            if (motsTrouvesJ2.Count != 0)
+            {
+                NuageDeMots NuageJoueur2 = new NuageDeMots();
+                NuageJoueur2.CreerNuageDeMots(motsTrouvesJ2, "NuageJoueur2.png", 2);
 
-            Process.Start(new ProcessStartInfo("NuageJoueur1.png") { UseShellExecute = true });
-            Process.Start(new ProcessStartInfo("NuageJoueur2.png") { UseShellExecute = true });
+                Process.Start(new ProcessStartInfo("NuageJoueur2.png") { UseShellExecute = true });
+            }
+            else
+            {
+                Console.WriteLine("Aucun mot n'a été entré par le Joueur 2, pas de nuage de mots");
+            }
+
         }
     }
 }
