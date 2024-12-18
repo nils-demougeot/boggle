@@ -26,7 +26,7 @@ public class Jeu
 
     #region Saisie Nom
     /// <summary>
-    /// Demande à l'utilisateur de saisir son nom de joueur dans la console et enregistre cette chaine de caract�re
+    /// Demande à l'utilisateur de saisir son nom de joueur dans la console et enregistre cette chaine de caractère
     /// </summary>
     /// <param name="j">Le numéro du joueur (1 ou 2)</param>
     /// <returns>Retourne le nom saisi dans la console par le joueur</returns>
@@ -65,10 +65,10 @@ public class Jeu
 
     #region Minuteur
     /// <summary>
-    /// Lance un minuteur en fonction de la dur�e voulue et de l'heure de d�part
+    /// Lance un minuteur en fonction de la durée voulue et de l'heure de départ
     /// </summary>
-    /// <param name="duree">Dur�e du minuteur</param>
-    /// <param name="debut">Heure de d�but du minuteur</param>
+    /// <param name="duree">Durée du minuteur</param>
+    /// <param name="debut">Heure de début du minuteur</param>
     /// <returns>Retourne le temps restant, de type TimeSpan</returns>
     public TimeSpan Minuteur(TimeSpan duree, DateTime debut)
     {

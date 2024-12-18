@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 public class TriDictionnaire
 {
+    #region Tri Rapide
     /// <summary>
     /// Tri le tableau dictionnaire passé en paramètre par ordre alphabétique et par dichotomie (Tri Quick Sort / Tri Rapide) et partition.
     /// </summary>
@@ -46,5 +47,6 @@ public class TriDictionnaire
 
         return frontiereActuelle + 1;
     }
+    #endregion
 }
 

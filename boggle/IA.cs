@@ -51,7 +51,7 @@ public class IA
             // Affiche la case clignotante
             Console.SetCursorPosition(boxPositionX, bottomLine);
             Console.BackgroundColor = colors[colorIndex]; // Change la couleur de fond
-            Console.Write("  "); // Dessine un espace color�
+            Console.Write("  "); // Dessine un espace coloré
             Console.ResetColor();
 
             // Affiche le mot à droite
