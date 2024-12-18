@@ -45,6 +45,11 @@ public class Dictionnaire
     {
         get { return this.mots; }
     }
+
+    public string Langue
+    {
+        get { return this.langue; }
+    }
     #endregion
 
     #region Description Dictionnaire [toString()]

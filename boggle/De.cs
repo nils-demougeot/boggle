@@ -7,6 +7,7 @@ public class De
     char[] lettres;
     char faceVisible;
     string path = "../../../docs/Lettres.txt";
+    //Dictionnaire dico;
 
     public char FaceVisible
     {
@@ -16,6 +17,11 @@ public class De
 
     public De(Random r)
     {
+        // this.dico = _dico;
+        // if (this.dico.Langue != "fr") 
+        // {
+        //     this.path = "../../../docs/LettresEN.txt";
+        // }
         this.lettres = new char[6];
         string texte = File.ReadAllText(this.path);
         Dictionary<int, char> res = new Dictionary<int, char>();
@@ -47,11 +53,11 @@ public class De
     }
 
 
-    #region Lancer un Dé
+    #region Lancer un Dï¿½
     /// <summary>
-    /// Sélectionne une face aléatoire du dé, c'est à dire, une lettre aléatoire dans le tableau de lettre que représente le dé
+    /// Sï¿½lectionne une face alï¿½atoire du dï¿½, c'est ï¿½ dire, une lettre alï¿½atoire dans le tableau de lettre que reprï¿½sente le dï¿½
     /// </summary>
-    /// <param name="r">Instance de la classe Random qui nous permettra d'avoir un nombre aléatoire entre 0 et la longueur du tableau/dé avec r.Next()</param> 
+    /// <param name="r">Instance de la classe Random qui nous permettra d'avoir un nombre alï¿½atoire entre 0 et la longueur du tableau/dï¿½ avec r.Next()</param> 
     public void LancerDe(Random r)
     {
         this.faceVisible = this.lettres[r.Next(0, this.lettres.Length)];
@@ -59,9 +65,9 @@ public class De
     #endregion
     #region toString
     /// <summary>
-    /// Fonction qui décrit le dé : toutes les lettres qu'il contient sur chaque "face" et sa face visible / sa lettre active
+    /// Fonction qui dï¿½crit le dï¿½ : toutes les lettres qu'il contient sur chaque "face" et sa face visible / sa lettre active
     /// </summary>
-    /// <returns>Retourne une chaine de caractère décrivant le dé sous cette forme : Lettres : A, B, C, D, E, F Face visible : B</returns>
+    /// <returns>Retourne une chaine de caractï¿½re dï¿½crivant le dï¿½ sous cette forme : Lettres : A, B, C, D, E, F Face visible : B</returns>
     public string toString()
     {
         string listeLettres = "";

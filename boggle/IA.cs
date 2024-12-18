@@ -31,7 +31,7 @@ public class IA
         int colorIndex = 0;
 
         // Positionnement initial
-        int bottomLine = Console.WindowHeight - 1; // Dernière ligne visible
+        int bottomLine = Console.WindowHeight - 1; // Derniï¿½re ligne visible
         int boxPositionX = 1; // Position horizontale de la case
         int textPositionX = 4; // Position horizontale du mot
 
@@ -51,10 +51,10 @@ public class IA
             // Affiche la case clignotante
             Console.SetCursorPosition(boxPositionX, bottomLine);
             Console.BackgroundColor = colors[colorIndex]; // Change la couleur de fond
-            Console.Write("  "); // Dessine un espace coloré
+            Console.Write("  "); // Dessine un espace colorï¿½
             Console.ResetColor();
 
-            // Affiche le mot à droite
+            // Affiche le mot ï¿½ droite
             Console.SetCursorPosition(textPositionX, bottomLine);
             Console.ForegroundColor = ConsoleColor.DarkGray;
             Console.Write("L'IA teste les mots... ");
@@ -62,13 +62,13 @@ public class IA
             
             Console.Write(mot);
             Console.ResetColor();
-            // Mise à jour des indices
+            // Mise ï¿½ jour des indices
             colorIndex = (colorIndex + 1) % colors.Length; // Cycle des couleurs
 
             Random afficherCeMot = new Random();
-            if (afficherCeMot.Next(0,5) == 0)
+            if (afficherCeMot.Next(0,3*difficulte) == 0)
             {
-                Thread.Sleep(20*(this.plateau.Taille**3)/difficulte);
+                Thread.Sleep((int)(50*Math.Pow(this.plateau.Taille, 0.66)/Math.Pow(difficulte, 1)));
             }
             
 
