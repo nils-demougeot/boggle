@@ -6,8 +6,8 @@ public class De
 {
     char[] lettres;
     char faceVisible;
-    string path = "../../../docs/Lettres.txt";
-    //Dictionnaire dico;
+    string path;
+    Dictionnaire dico;
 
     public char FaceVisible
     {
@@ -15,13 +15,14 @@ public class De
         set { this.faceVisible = value; }
     }
 
-    public De(Random r)
+    public De(Random r, Dictionnaire _dico)
     {
-        // this.dico = _dico;
-        // if (this.dico.Langue != "fr") 
-        // {
-        //     this.path = "../../../docs/LettresEN.txt";
-        // }
+        this.path = "../../../docs/Lettres.txt";
+        this.dico = _dico;
+        if (this.dico.Langue != "fr") 
+        {
+            this.path = "../../../docs/LettresEN.txt";
+        }
         this.lettres = new char[6];
         string texte = File.ReadAllText(this.path);
         Dictionary<int, char> res = new Dictionary<int, char>();

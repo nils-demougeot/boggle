@@ -26,9 +26,9 @@ public class Jeu
 
     #region Saisie Nom
     /// <summary>
-    /// Demande à l'utilisateur de saisir son nom de joueur dans la console et enregistre cette chaine de caractère
+    /// Demande ï¿½ l'utilisateur de saisir son nom de joueur dans la console et enregistre cette chaine de caractï¿½re
     /// </summary>
-    /// <param name="j">Le numéro du joueur (1 ou 2)</param>
+    /// <param name="j">Le numï¿½ro du joueur (1 ou 2)</param>
     /// <returns>Retourne le nom saisi dans la console par le joueur</returns>
     public string SaisirNom(int j)
     {
@@ -47,7 +47,7 @@ public class Jeu
 
         while (string.IsNullOrWhiteSpace(saisie))
         {
-            Console.Write("Saisie incorrecte, veuillez réessayer : ");
+            Console.Write("Saisie incorrecte, veuillez rï¿½essayer : ");
             if (j == 1)
             {
                 Console.ForegroundColor = ConsoleColor.Blue;
@@ -65,10 +65,10 @@ public class Jeu
 
     #region Minuteur
     /// <summary>
-    /// Lance un minuteur en fonction de la durée voulue et de l'heure de départ
+    /// Lance un minuteur en fonction de la durï¿½e voulue et de l'heure de dï¿½part
     /// </summary>
-    /// <param name="duree">Durée du minuteur</param>
-    /// <param name="debut">Heure de début du minuteur</param>
+    /// <param name="duree">Durï¿½e du minuteur</param>
+    /// <param name="debut">Heure de dï¿½but du minuteur</param>
     /// <returns>Retourne le temps restant, de type TimeSpan</returns>
     public TimeSpan Minuteur(TimeSpan duree, DateTime debut)
     {
@@ -78,12 +78,32 @@ public class Jeu
     }
     #endregion
 
-    #region Mise à jour du score
+    #region Affichage barre de progression du minuteur
+    public string BarreProgression(TimeSpan tempsRestant, TimeSpan duree)
+    {
+        string barre = "";
+        double totalSymbols = 20.0;
+        double percentage = Convert.ToDouble(tempsRestant.Seconds)/60.0;
+        int numberOfDashes = Convert.ToInt32(percentage * totalSymbols);
+        for (int i = 0; i < totalSymbols - numberOfDashes; i++) 
+        {
+            barre += "â–ˆ";
+        }
+        for (int i = 0; i < numberOfDashes; i++) 
+        {
+            barre += "â–‘";
+        }
+        //barre += "|";
+        return barre;
+    }
+    #endregion
+
+    #region Mise ï¿½ jour du score
     /// <summary>
-    /// Met à jour le score du joueur en fonction du mot entré
+    /// Met ï¿½ jour le score du joueur en fonction du mot entrï¿½
     /// </summary>
-    /// <param name="j">Numéro du joueur (0 étant le premier joueur et 1 le second)</param>
-    /// <param name="mot">Mot entré par le joueur, précédemment vérifié</param>
+    /// <param name="j">Numï¿½ro du joueur (0 ï¿½tant le premier joueur et 1 le second)</param>
+    /// <param name="mot">Mot entrï¿½ par le joueur, prï¿½cï¿½demment vï¿½rifiï¿½</param>
     public void UpdateScore(int j, string mot)
     {
         mot = mot.ToUpper();

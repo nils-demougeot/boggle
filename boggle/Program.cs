@@ -39,7 +39,7 @@ class Program
         Console.ForegroundColor = ConsoleColor.White;
         Console.WriteLine(asciiArt);
         Console.ResetColor();
-        Console.Write("Nombre de manche par joueur : ");
+        Console.Write("\nNombre de manche par joueur : ");
         Console.ForegroundColor = ConsoleColor.Yellow;
 
         int nbTours = 1;
@@ -63,14 +63,16 @@ class Program
 
         bool vsIA = false;
         Jeu jeu = new Jeu(nbTours * 60);
+        Console.WriteLine();
         Joueur j1 = new Joueur(jeu.SaisirNom(1));
+        Console.WriteLine();
         Joueur j2 = new Joueur(jeu.SaisirNom(2));
 
         int difficulte = 1;
         if (j2.Nom.ToUpper() == "IA")
         {
             vsIA = true;
-            Console.Write("Niveau de difficulté de l'IA [1, 2, 3] : ");
+            Console.Write("\nNiveau de difficulté de l'IA [1, 2, 3] : ");
             Console.ForegroundColor = ConsoleColor.Yellow;
             
             string entreeDifficulte;
@@ -96,7 +98,7 @@ class Program
         TimeSpan duree = TimeSpan.FromSeconds(nbTours * 60);
         DateTime debut = DateTime.Now;
         Random r = new Random();
-        Console.Write("Taille du plateau : ");
+        Console.Write("\nTaille du plateau : ");
         Console.ForegroundColor = ConsoleColor.Yellow;
 
         int taille = 6;
@@ -117,10 +119,26 @@ class Program
             }
         }
 
-        
-        Console.Write("Langue (\"fr\" ou \"en\") : ");
+        Console.Write("\nLangue (\"fr\" ou \"en\") : ");
+        string langue = "fr";
+        bool estValideLangue = false;
+        while (!estValideLangue)
+        {
+            langue = Console.ReadLine();
+            Console.ResetColor();
+            if (langue != null && (langue.ToUpper() == "FR" || langue.ToUpper() == "EN"))
+            {
+                estValideLangue = true;
+            }
+            else
+            {
+                Console.WriteLine("Entrée invalide. Veuillez réessayer.");
+                Console.Write("Langue (\"fr\" ou \"en\") : ");
+            }
+        }
+
         Console.ForegroundColor = ConsoleColor.Yellow;
-        Dictionnaire dico = new Dictionnaire(Console.ReadLine());
+        Dictionnaire dico = new Dictionnaire(langue);
         Console.ResetColor();
         List<string> motsTrouves = new List<string>();
         De[,] des = new De[taille, taille];
@@ -129,7 +147,7 @@ class Program
         {
             for (int y = 0; y < taille; y++)
             {
-                des[x, y] = new De(r);
+                des[x, y] = new De(r, dico);
             }
         }
         for (int i = 0; i < nbTours; i++)
@@ -189,7 +207,10 @@ class Program
                 TimeSpan tempsRestant = jeu.Minuteur(dureeManche, debutManche);
                 Console.Write("Temps restant : ");
                 Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine(tempsRestant.Minutes + ":" + tempsRestant.Seconds);
+                Console.Write(tempsRestant.Minutes + ":" + tempsRestant.Seconds + "\t"); 
+                Console.ResetColor();
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine(jeu.BarreProgression(tempsRestant, dureeManche));
                 Console.ResetColor();
                 Console.Write("Score : ");
                 Console.ForegroundColor = ConsoleColor.Yellow; 

@@ -90,7 +90,10 @@ public class IA
                 TimeSpan tempsRestant = jeu.Minuteur(dureeIA, debutIA);
                 Console.Write("Temps restant : ");
                 Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine(tempsRestant.Minutes + ":" + tempsRestant.Seconds);
+                Console.Write(tempsRestant.Minutes + ":" + tempsRestant.Seconds + "\t");
+                Console.ResetColor();
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine(jeu.BarreProgression(tempsRestant, dureeIA));
                 Console.ResetColor();
                 Console.Write("Score : ");
                 Console.ForegroundColor = ConsoleColor.Yellow;
