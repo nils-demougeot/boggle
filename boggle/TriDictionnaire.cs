@@ -48,5 +48,70 @@ public class TriDictionnaire
         return frontiereActuelle + 1;
     }
     #endregion
+
+    #region Tri Fusion
+    static void TriFusion(string[] tab)
+    {
+        if (tab.Length > 1)
+        {
+            int milieu = tab.Length / 2;
+            string[] gauche = new string[milieu];
+            string[] droite = new string[tab.Length - milieu];
+
+            for (int i = 0; i < milieu; i++)
+            {
+                gauche[i] = tab[i];
+            }
+
+            for (int i = milieu; i < tab.Length; i++)
+            {
+                droite[i - milieu] = tab[i];
+            }
+
+            TriFusion(gauche);
+            TriFusion(droite);
+
+            Fusion(tab, gauche, droite);
+
+        }
+    }
+
+    static void Fusion(string[] tab, string[] gauche, string[] droite)
+    {
+        int i = 0;
+        int j = 0;
+        int k = 0;
+
+        while (i < gauche.Length && j < droite.Length)
+        {
+            if (String.Compare(gauche[i], droite[j]) < 0)
+            {
+                tab[k] = gauche[i];
+                i++;
+            }
+            else
+            {
+                tab[k] = droite[j];
+                j++;
+            }
+
+            k++;
+        }
+
+        while (i < gauche.Length)
+        {
+            tab[k] = gauche[i];
+            i++;
+            k++;
+        }
+
+        while (j < droite.Length)
+        {
+            tab[k] = droite[j];
+            j++;
+            k++;
+        }
+    }
+    #endregion
 }
 
