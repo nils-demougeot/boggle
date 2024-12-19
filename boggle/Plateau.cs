@@ -91,10 +91,11 @@ public class Plateau
                 {
                     if (facesVisibles[i, j] == mot[0])
                     {
-                        if (RechercherMot(i, j, mot, 0, visited))
+                        if (RechercherMot(i, j, mot, 0, visited) )
                         {
                             joueur.AddMot(mot);
                             output = "Mot valide";
+                            Console.WriteLine("----AJOUT");
                         }
                     }
                 }
