@@ -23,7 +23,7 @@ public class IA
     public void Jouer()
     {
         List<string> mots = new List<string>();
-        List<string> motsValides = new List<string>();
+        List<string> motsInvalides = new List<string>();
 
         TimeSpan dureeProcess = TimeSpan.FromSeconds((int)(6/this.plateau.Taille) + 1);
         DateTime debutProcess = DateTime.Now;
@@ -32,20 +32,20 @@ public class IA
         int colorIndex = 0;
 
         int bottomLine = Console.WindowHeight - 1;
-        int boxPositionX = 1;
-        int textPositionX = 4;
+        int boxPositionX = 1; 
+        int textPositionX = 4; 
 
         Random random = new Random();
         
-        while (this.jeu.Minuteur(dureeProcess, debutProcess) > TimeSpan.Zero) 
+        while (mots.Count < difficulte * 3) 
         {
             int r = random.Next(dico.Mots.Length);
             string mot = dico.Mots[r];
             if (this.plateau.Test_Plateau(mot, this.jeu.Joueurs[1]) == "Mot valide")
             {
-                motsValides.Add(mot);
+                mots.Add(mot);
             }
-            else { mots.Add(mot); }
+            else { motsInvalides.Add(mot); }
         }
 
         TimeSpan dureeIA = TimeSpan.FromSeconds(60);
@@ -64,7 +64,6 @@ public class IA
                 Console.SetCursorPosition(0, bottomLine);
                 Console.Write(new string(' ', Console.WindowWidth));
                 
-
                 Console.SetCursorPosition(boxPositionX, bottomLine);
                 Console.BackgroundColor = colors[colorIndex];
                 Console.Write("  ");
@@ -75,9 +74,8 @@ public class IA
                 Console.Write("L'IA teste les mots... ");
                 Console.ForegroundColor = colors[colorIndex];
                 
-                Console.Write(mots[random.Next(mots.Count)]);
+                Console.Write(motsInvalides[random.Next(motsInvalides.Count)]);
                 Console.ResetColor();
-                
                 colorIndex = (colorIndex + 1) % colors.Length;
 
                 Random afficherCeMot = new Random();
@@ -86,7 +84,7 @@ public class IA
 
             Console.SetCursorPosition(0, bottomLine);
             Console.Write(new string(' ', Console.WindowWidth));
-            string mot = motsValides[index];
+            string mot = mots[index];
             this.jeu.UpdateScore(1, mot);
             
 
