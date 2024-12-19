@@ -60,7 +60,7 @@ public class TriDictionnaire
     /// Tri le tableau dictionnaire passé en paramètre par ordre alphabétique (Tri Fusion / Merge Sort).
     /// </summary>
     /// <param name="dictionnaire">Tableau non trié qu'il faut trier</param>
-    static void TriFusion(string[] dictionnaire)
+    public static void TriFusion(string[] dictionnaire)
     {
         if (dictionnaire.Length > 1)
         {

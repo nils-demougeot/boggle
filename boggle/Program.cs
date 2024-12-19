@@ -208,7 +208,6 @@ class Program
             Console.WriteLine(" de jouer ─────────|");
             Console.ResetColor();
 
-            jeu.Joueurs[(i % 2)].Mots = new List<string>();
             TimeSpan dureeManche = TimeSpan.FromSeconds(5);//modif
             DateTime debutManche = DateTime.Now;
             
@@ -292,7 +291,8 @@ class Program
         #endregion
 
         #region Affichage des scores
-        Console.Clear();
+        Console.WriteLine();
+        Console.WriteLine("||───────────── SCORE ─────────────||");
 
         Console.WriteLine(jeu.Joueurs[0].toString());
         Console.WriteLine(jeu.Joueurs[1].toString());
@@ -333,6 +333,7 @@ class Program
         Dictionary<string, int> motsTrouvesFrequenceJ1 = new Dictionary<string, int>();
         foreach (var mot in jeu.Joueurs[0].Mots)
         {
+            Console.WriteLine("mots J1 :" + mot);
             if (motsTrouvesFrequenceJ1.ContainsKey(mot))
             {
                 motsTrouvesFrequenceJ1[mot]++;
@@ -346,6 +347,7 @@ class Program
         Dictionary<string, int> motsTrouvesFrequenceJ2 = new Dictionary<string, int>();
         foreach (var mot in jeu.Joueurs[1].Mots)
         {
+            Console.WriteLine("mots J2 :" + mot);
             if (motsTrouvesFrequenceJ2.ContainsKey(mot))
             {
                 motsTrouvesFrequenceJ2[mot]++;

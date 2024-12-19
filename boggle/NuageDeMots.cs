@@ -55,7 +55,7 @@ namespace boggle
 
                 using var paint = new SKPaint
                 {
-                    Color = new SKColor((byte)random.Next(180), (byte)random.Next(180), (byte)random.Next(180)), //peut etre blanc donc prblm
+                    Color = new SKColor((byte)random.Next(180), (byte)random.Next(180), (byte)random.Next(180)),
                     TextSize = fontSize,
                     IsAntialias = true,
                     Typeface = SKTypeface.FromFamilyName("Arial")

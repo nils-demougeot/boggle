@@ -14,7 +14,7 @@ public class Joueur
         this.mots = new List<string>();
     }
 
-    #region Accès écriture/lecture des attributs
+    #region Accès écriture et lecture des attributs
     public string Nom
     {
         get { return this.nom; }

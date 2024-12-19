@@ -37,7 +37,7 @@ public class Dictionnaire
             lecteur.Close();
         }
 
-        TriDictionnaire.TriRapideDico(this.mots, 0, this.mots.Length - 1);
+        TriDictionnaire.TriFusion(this.mots);
     }
 
     #region Accès écriture/lecture des attributs
