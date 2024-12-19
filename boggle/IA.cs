@@ -25,7 +25,7 @@ public class IA
         List<string> mots = new List<string>();
         List<string> motsValides = new List<string>();
 
-        TimeSpan dureeProcess = TimeSpan.FromSeconds(6);
+        TimeSpan dureeProcess = TimeSpan.FromSeconds((int)(6/this.plateau.Taille) + 1);
         DateTime debutProcess = DateTime.Now;
 
         // Couleurs pour la "case" clignotante
@@ -85,7 +85,7 @@ public class IA
                 colorIndex = (colorIndex + 1) % colors.Length; // Cycle des couleurs
 
                 Random afficherCeMot = new Random();
-                Thread.Sleep(200);
+                Thread.Sleep(100);
             }
 
             Console.SetCursorPosition(0, bottomLine); // Va tout en bas de la console
