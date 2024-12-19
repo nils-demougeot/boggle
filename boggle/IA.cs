@@ -41,7 +41,8 @@ public class IA
         {
             int r = random.Next(dico.Mots.Length);
             string mot = dico.Mots[r];
-            if (this.plateau.Test_Plateau(mot, this.jeu.Joueurs[1]) == "Mot valide")
+            string res = this.plateau.Test_Plateau(mot, this.jeu.Joueurs[1]);
+            if (res == "Mot valide")
             {
                 mots.Add(mot);
             }
@@ -116,6 +117,7 @@ public class IA
             Console.ForegroundColor = ConsoleColor.Yellow;
 
             Thread.Sleep(500);
+
             for (int i = 0; i < mot.Length; i++)
             {
                 TimeSpan dureeTyping = TimeSpan.FromSeconds(0.05 + random.NextDouble() * (0.4 - 0.05));
@@ -125,13 +127,20 @@ public class IA
             }
             Console.WriteLine();
             Console.ResetColor();
-            Console.WriteLine("Mot Valide\n\n");
+            Console.Write("  ");
+            Console.BackgroundColor = ConsoleColor.White;
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
+            Console.Write(" + ");
+            Console.ResetColor();
+
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine(" Mot valide ");
+            Console.ResetColor();
+            Console.WriteLine();
             index++;
 
-
-
-
             
+
         }
             
     }

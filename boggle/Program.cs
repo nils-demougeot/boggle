@@ -333,7 +333,6 @@ class Program
         Dictionary<string, int> motsTrouvesFrequenceJ1 = new Dictionary<string, int>();
         foreach (var mot in jeu.Joueurs[0].Mots)
         {
-            Console.WriteLine("mots J1 :" + mot);
             if (motsTrouvesFrequenceJ1.ContainsKey(mot))
             {
                 motsTrouvesFrequenceJ1[mot]++;
@@ -347,7 +346,6 @@ class Program
         Dictionary<string, int> motsTrouvesFrequenceJ2 = new Dictionary<string, int>();
         foreach (var mot in jeu.Joueurs[1].Mots)
         {
-            Console.WriteLine("mots J2 :" + mot);
             if (motsTrouvesFrequenceJ2.ContainsKey(mot))
             {
                 motsTrouvesFrequenceJ2[mot]++;
