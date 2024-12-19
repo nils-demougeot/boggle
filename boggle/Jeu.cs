@@ -93,7 +93,6 @@ public class Jeu
         {
             barre += "░";
         }
-        //barre += "|";
         return barre;
     }
     #endregion

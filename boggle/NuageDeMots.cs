@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-//dotnet add package SkiaSharp
 
 
 
@@ -10,19 +9,25 @@ namespace boggle
 {
     public class NuageDeMots
     {
-        public void CreerNuageDeMots(Dictionary<string, int> wordFrequencies, string outputPath, int numJoueur, int canvasWidth = 800, int canvasHeight = 600)
+        /// <summary>
+        /// Génère et sauvegarde une image représentant le nuage des mots (les mots les plus trouvés durant la partie en grand)
+        /// </summary>
+        /// <param name="associationMotFrequence">Dictionnaire contenant tous les mots uniques trouvés par le joueur associés au nombre de fois que ce mot a été trouvé</param>
+        /// <param name="cheminSauvegarde">Adresse où le fichier image du nuage de mot sera sauvegardé</param>
+        /// <param name="numJoueur">Numéro du joueur (joueur 1 ou joueur 2)</param>
+        /// <param name="largeurImage">Défini la largeur en pixel de l'image</param>
+        /// <param name="hauteurImage">Défini la hauteur en pixel de l'image</param>
+        /// <exception cref="ArgumentException">Si le joueur n'a trouvé aucun mot pendant la partie, on n'affiche pas de nuage de mot</exception>
+        public void CreerNuageDeMots(Dictionary<string, int> associationMotFrequence, string cheminSauvegarde, int numJoueur, int largeurImage = 800, int hauteurImage = 600)
         {
-            // Validate inputs
-            if (wordFrequencies == null || !wordFrequencies.Any())
+            if (associationMotFrequence == null || !associationMotFrequence.Any())
             {
                 throw new ArgumentException("Auncun mot trouvé par le joueur");
             }
 
-            // Create a SkiaSharp surface
-            using var bitmap = new SKBitmap(canvasWidth, canvasHeight);
+            using var bitmap = new SKBitmap(largeurImage, hauteurImage);
             using var canvas = new SKCanvas(bitmap);
 
-            // Clear the canvas with a white background
             if (numJoueur == 1)
             {
                 canvas.Clear(new SKColor(222, 235, 255));
@@ -31,28 +36,23 @@ namespace boggle
                 canvas.Clear(new SKColor(255, 220, 220));
             }
 
-            // Prepare variables
             Random random = new Random();
-            int maxFrequency = wordFrequencies.Values.Max();
-            int minFontSize = 15; // Minimum font size
-            int maxFontSize = 75; // Maximum font size
+            int maxFrequency = associationMotFrequence.Values.Max();
+            int minFontSize = 15;
+            int maxFontSize = 75;
 
-            // Sort words by frequency (descending)
-            var sortedWords = wordFrequencies.OrderByDescending(kvp => kvp.Value);
+            var sortedWords = associationMotFrequence.OrderByDescending(kvp => kvp.Value);
 
             foreach (var wordEntry in sortedWords)
             {
                 string word = wordEntry.Key;
                 int frequency = wordEntry.Value;
 
-                // Calculate font size based on frequency
                 int fontSize = minFontSize + (frequency * (maxFontSize - minFontSize) / maxFrequency);
 
-                // Randomize position
-                int x = random.Next(0, canvasWidth - fontSize * word.Length);
-                int y = random.Next(fontSize, canvasHeight - fontSize);
+                int x = random.Next(0, largeurImage - fontSize * word.Length);
+                int y = random.Next(fontSize, hauteurImage - fontSize);
 
-                // Create paint for the word
                 using var paint = new SKPaint
                 {
                     Color = new SKColor((byte)random.Next(180), (byte)random.Next(180), (byte)random.Next(180)), //peut etre blanc donc prblm
@@ -61,17 +61,15 @@ namespace boggle
                     Typeface = SKTypeface.FromFamilyName("Arial")
                 };
 
-                // Draw the word on the canvas
                 canvas.DrawText(word, x, y, paint);
             }
 
-            // Save the canvas to an image file
             using var image = SKImage.FromBitmap(bitmap);
             using var data = image.Encode(SKEncodedImageFormat.Png, 100);
-            using var stream = System.IO.File.OpenWrite(outputPath);
+            using var stream = System.IO.File.OpenWrite(cheminSauvegarde);
             data.SaveTo(stream);
 
-            Console.WriteLine("Nuage de mot du joueur "+ numJoueur + " sauvegardé à /bin/debug/net6.0/"+outputPath);
+            Console.WriteLine("Nuage de mot du joueur "+ numJoueur + " sauvegardé à /bin/debug/net6.0/"+ cheminSauvegarde);
         }
         
 

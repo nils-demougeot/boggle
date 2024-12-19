@@ -9,7 +9,7 @@ public class TriDictionnaire
 {
     #region Tri Rapide
     /// <summary>
-    /// Tri le tableau dictionnaire passé en paramètre par ordre alphabétique et par dichotomie (Tri Quick Sort / Tri Rapide) et partition.
+    /// Tri le tableau dictionnaire passé en paramètre par ordre alphabétique et par dichotomie (Tri Quick Sort / Tri Rapide).
     /// </summary>
     /// <param name="dictionnaire">"Dictionnaire" contenant des mots dans chaque case du tableau non trié</param>
     /// <param name="gauche">indice de départ dans le tableau pour le tri diviser pour régner (0 en général)</param>
@@ -24,6 +24,12 @@ public class TriDictionnaire
         }
     }
 
+    /// <summary>
+    /// Partitionne le tableau : met les chaines avant le pivot dans l'ordre alphabétique à gauche et les chaines après le pivot dans l'ordre alphabétique à droite.
+    /// </summary>
+    /// <param name="dictionnaire">"Dictionnaire" contenant des mots dans chaque case du tableau non trié</param>
+    /// <param name="gauche">indice de départ dans le sous tableau pour le tri</param>
+    /// <param name="droite">indice de fin dans le sous tableau pour le tri</param>
     static int Partition(string[] dictionnaire, int gauche, int droite)
     {
         string pivot = dictionnaire[droite];
@@ -50,32 +56,42 @@ public class TriDictionnaire
     #endregion
 
     #region Tri Fusion
-    static void TriFusion(string[] tab)
+    /// <summary>
+    /// Tri le tableau dictionnaire passé en paramètre par ordre alphabétique (Tri Fusion / Merge Sort).
+    /// </summary>
+    /// <param name="dictionnaire">Tableau non trié qu'il faut trier</param>
+    static void TriFusion(string[] dictionnaire)
     {
-        if (tab.Length > 1)
+        if (dictionnaire.Length > 1)
         {
-            int milieu = tab.Length / 2;
+            int milieu = dictionnaire.Length / 2;
             string[] gauche = new string[milieu];
-            string[] droite = new string[tab.Length - milieu];
+            string[] droite = new string[dictionnaire.Length - milieu];
 
             for (int i = 0; i < milieu; i++)
             {
-                gauche[i] = tab[i];
+                gauche[i] = dictionnaire[i];
             }
 
-            for (int i = milieu; i < tab.Length; i++)
+            for (int i = milieu; i < dictionnaire.Length; i++)
             {
-                droite[i - milieu] = tab[i];
+                droite[i - milieu] = dictionnaire[i];
             }
 
             TriFusion(gauche);
             TriFusion(droite);
 
-            Fusion(tab, gauche, droite);
+            Fusion(dictionnaire, gauche, droite);
 
         }
     }
 
+    /// <summary>
+    /// Fusionne deux sous tableau triés.
+    /// </summary>
+    /// <param name="tab">Tableau principal non trié qu'il faut trier</param>
+    /// <param name="gauche">Sous tableau gauche trié</param>
+    /// <param name="droite">Sous tableau droit trié</param>
     static void Fusion(string[] tab, string[] gauche, string[] droite)
     {
         int i = 0;

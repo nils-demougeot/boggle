@@ -28,14 +28,12 @@ public class IA
         TimeSpan dureeProcess = TimeSpan.FromSeconds((int)(6/this.plateau.Taille) + 1);
         DateTime debutProcess = DateTime.Now;
 
-        // Couleurs pour la "case" clignotante
         ConsoleColor[] colors = { ConsoleColor.Red, ConsoleColor.Green, ConsoleColor.Yellow, ConsoleColor.Blue, ConsoleColor.Cyan, ConsoleColor.Magenta, ConsoleColor.DarkYellow };
         int colorIndex = 0;
 
-        // Positionnement initial
-        int bottomLine = Console.WindowHeight - 1; // Derni�re ligne visible
-        int boxPositionX = 1; // Position horizontale de la case
-        int textPositionX = 4; // Position horizontale du mot
+        int bottomLine = Console.WindowHeight - 1;
+        int boxPositionX = 1;
+        int textPositionX = 4;
 
         Random random = new Random();
         
@@ -63,17 +61,15 @@ public class IA
             
             while (this.jeu.Minuteur(dureeRecherche, debutRecherche) > TimeSpan.Zero) 
             { 
-                Console.SetCursorPosition(0, bottomLine); // Va tout en bas de la console
-                Console.Write(new string(' ', Console.WindowWidth)); // Efface la ligne
+                Console.SetCursorPosition(0, bottomLine);
+                Console.Write(new string(' ', Console.WindowWidth));
                 
 
-                // Affiche la case clignotante
                 Console.SetCursorPosition(boxPositionX, bottomLine);
-                Console.BackgroundColor = colors[colorIndex]; // Change la couleur de fond
-                Console.Write("  "); // Dessine un espace coloré
+                Console.BackgroundColor = colors[colorIndex];
+                Console.Write("  ");
                 Console.ResetColor();
 
-                // Affiche le mot à droite
                 Console.SetCursorPosition(textPositionX, bottomLine);
                 Console.ForegroundColor = ConsoleColor.DarkGray;
                 Console.Write("L'IA teste les mots... ");
@@ -81,14 +77,14 @@ public class IA
                 
                 Console.Write(mots[random.Next(mots.Count)]);
                 Console.ResetColor();
-                // Mise à jour des indices
-                colorIndex = (colorIndex + 1) % colors.Length; // Cycle des couleurs
+                
+                colorIndex = (colorIndex + 1) % colors.Length;
 
                 Random afficherCeMot = new Random();
                 Thread.Sleep(100);
             }
 
-            Console.SetCursorPosition(0, bottomLine); // Va tout en bas de la console
+            Console.SetCursorPosition(0, bottomLine);
             Console.Write(new string(' ', Console.WindowWidth));
             string mot = motsValides[index];
             this.jeu.UpdateScore(1, mot);

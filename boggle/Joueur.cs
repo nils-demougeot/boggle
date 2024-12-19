@@ -14,6 +14,7 @@ public class Joueur
         this.mots = new List<string>();
     }
 
+    #region Accès écriture/lecture des attributs
     public string Nom
     {
         get { return this.nom; }
@@ -31,6 +32,7 @@ public class Joueur
         get { return this.mots; }
         set { this.mots = value; }
     }
+    #endregion
 
     #region Vérifier si le mot a déjà été trouvé
     /// <summary>

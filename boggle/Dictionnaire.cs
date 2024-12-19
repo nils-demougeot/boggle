@@ -60,7 +60,6 @@ public class Dictionnaire
     public string toString()
     {
         string chaineRetour = "";
-        //Nombre de mots par longueur
         chaineRetour += "Nombre de mots ...\n";
         for (int taille = 1; taille < mots.Length;taille++)
         {
@@ -75,7 +74,6 @@ public class Dictionnaire
             if (nbMots > 0) { chaineRetour += "- De longueur " + taille + " : " + nbMots + "\n"; }
         }
 
-        //Nombre de mots par lettre
         string alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         chaineRetour += "\nNombre de mots ...\n";
         for (int lettre = 0; lettre < alphabet.Length; lettre++)
@@ -91,7 +89,6 @@ public class Dictionnaire
             if (nbMots > 0) { chaineRetour += "- Commençant par " + alphabet[lettre] + " : " + nbMots + "\n"; }
         }
 
-        //Langue
         chaineRetour += "\nLangue : " + this.langue + "\n";
 
         return chaineRetour;
