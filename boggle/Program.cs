@@ -225,10 +225,6 @@ class Program
                 {
                     motsTrouves[1].Add(mot);
                 }
-                // for (int j = 0; j < jeu.Joueurs[(i % 2)].Mots.Count; j++)
-                // {
-                //     motsTrouvesIA.Add(jeu.Joueurs[(i % 2)].Mots[j]);
-                // }
                 continue;
             }
             while (jeu.Minuteur(dureeManche, debutManche) > TimeSpan.Zero)
