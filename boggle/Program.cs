@@ -114,7 +114,7 @@ class Program
         #region Lecture taille plateau
         Console.Write("\nTaille du plateau ");
         Console.ForegroundColor = ConsoleColor.DarkGray;
-        Console.Write("(4x4 si laissé vide)");
+        Console.Write("(4 si laissé vide)");
         Console.ResetColor();
         Console.Write(" : ");
         Console.ForegroundColor = ConsoleColor.Yellow;
@@ -122,6 +122,10 @@ class Program
         int taille = 4;
         string entreeTaille;
         bool estValideTaille = false;
+
+        List<string>[] motsTrouves = new List<string>[2];
+        motsTrouves[0] = new List<string>();
+        motsTrouves[1] = new List<string>();
         while (!estValideTaille)
         {
             entreeTaille = Console.ReadLine();
@@ -176,7 +180,7 @@ class Program
 
         #region Creation de la partie et execution des manches successives
         Dictionnaire dico = new Dictionnaire(langue.ToLower());
-        List<string> motsTrouves = new List<string>();
+        
         De[,] des = new De[taille, taille];
 
         for (int x = 0; x < taille; x++)
@@ -188,6 +192,7 @@ class Program
         }
         for (int i = 0; i < nbTours; i++)
         {
+            jeu.Joueurs[(i % 2)].Mots = new List<string>();
             if (i%2 == 0)
             {
                 Console.WriteLine("\n\n||────────────── TOUR " + Convert.ToInt32((i)/2+1) + " ──────────────||");
@@ -215,11 +220,15 @@ class Program
             if (vsIA && (i % 2) == 1)
             {
                 IA ia = new IA(plateau, dico, jeu, difficulte);
-                ia.Jouer();
-                for (int j = 0; j < jeu.Joueurs[(i % 2)].Mots.Count; j++)
+                List<string> motsTrouvesTourIA = ia.Jouer();
+                foreach (var mot in motsTrouvesTourIA)
                 {
-                    motsTrouves.Add(jeu.Joueurs[(i % 2)].Mots[j]);
+                    motsTrouves[1].Add(mot);
                 }
+                // for (int j = 0; j < jeu.Joueurs[(i % 2)].Mots.Count; j++)
+                // {
+                //     motsTrouvesIA.Add(jeu.Joueurs[(i % 2)].Mots[j]);
+                // }
                 continue;
             }
             while (jeu.Minuteur(dureeManche, debutManche) > TimeSpan.Zero)
@@ -271,7 +280,7 @@ class Program
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine(" "+res+" ");
                     Console.ResetColor();
-
+                    motsTrouves[i%2].Add(mot);
                     jeu.UpdateScore((i % 2), mot);
                 } else
                 {
@@ -331,7 +340,7 @@ class Program
 
         #region Appel methode création nuage de mots
         Dictionary<string, int> motsTrouvesFrequenceJ1 = new Dictionary<string, int>();
-        foreach (var mot in jeu.Joueurs[0].Mots)
+        foreach (var mot in motsTrouves[0])
         {
             if (motsTrouvesFrequenceJ1.ContainsKey(mot))
             {
@@ -344,7 +353,7 @@ class Program
         }
 
         Dictionary<string, int> motsTrouvesFrequenceJ2 = new Dictionary<string, int>();
-        foreach (var mot in jeu.Joueurs[1].Mots)
+        foreach (var mot in motsTrouves[1])
         {
             if (motsTrouvesFrequenceJ2.ContainsKey(mot))
             {

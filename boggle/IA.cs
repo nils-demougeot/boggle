@@ -20,7 +20,7 @@ public class IA
         this.difficulte = _difficulte;
     }
 
-    public void Jouer()
+    public List<string> Jouer()
     {
         List<string> mots = new List<string>();
         List<string> motsInvalides = new List<string>();
@@ -142,6 +142,7 @@ public class IA
             
 
         }
+        return mots;
             
     }
 }
