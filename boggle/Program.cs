@@ -114,12 +114,12 @@ class Program
         #region Lecture taille plateau
         Console.Write("\nTaille du plateau ");
         Console.ForegroundColor = ConsoleColor.DarkGray;
-        Console.Write("(6 si laissé vide)");
+        Console.Write("(4x4 si laissé vide)");
         Console.ResetColor();
         Console.Write(" : ");
         Console.ForegroundColor = ConsoleColor.Yellow;
 
-        int taille = 6;
+        int taille = 4;
         string entreeTaille;
         bool estValideTaille = false;
         while (!estValideTaille)
@@ -128,7 +128,7 @@ class Program
             Console.ResetColor();
             if (entreeTaille == "")
             {
-                taille = 6;
+                taille = 4;
                 estValideTaille = true;
             }
             else if (int.TryParse(entreeTaille, out taille) && taille > 1)
