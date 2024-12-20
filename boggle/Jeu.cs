@@ -109,8 +109,9 @@ namespace boggle
         /// </summary>
         /// <param name="j">Numéro du joueur (0 étant le premier joueur et 1 le second)</param>
         /// <param name="mot">Mot entré par le joueur, précédemment vérifié</param>
-        public void UpdateScore(int j, string mot)
+        public int UpdateScore(int j, string mot)
         {
+            int s = this.joueurs[j].Score;
             mot = mot.ToUpper();
             string texte = File.ReadAllText(this.path);
             string[] lignes = texte.Split('\n');
@@ -128,6 +129,7 @@ namespace boggle
                     }
                 }
             }
+            return (this.joueurs[j].Score - s);
         }
         #endregion
     }

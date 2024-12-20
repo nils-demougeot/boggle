@@ -49,7 +49,7 @@ namespace boggle
                 int index = r.Next(0, 100);
                 for (int k = 0; k < res.Count; k++)
                 {
-                    if (index < list[k].Key && nbLettres[k] <= (int)(list[k].Value * taille))
+                    if (index < list[k].Key && nbLettres[k] <= (int)(list[k].Value * taille / 10))
                     {
                         this.lettres[j] = res[list[k].Key];
                         nbLettres[k]++;
