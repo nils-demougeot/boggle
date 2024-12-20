@@ -31,6 +31,42 @@ namespace boggle
             #endregion
 
             #region Lecture nombre de manches
+
+            Console.Write("\nDuree d'une manche en secondes : ");
+            Console.ForegroundColor = ConsoleColor.DarkGray;
+            Console.Write("(60 si laissé vide)");
+            Console.ResetColor();
+            Console.Write(" : ");
+
+            Console.ForegroundColor = ConsoleColor.Yellow;
+
+            int dureeTour = 60;
+            string entreeDureeTour;
+            bool estValideDureeTour = false;
+            while (!estValideDureeTour)
+            {
+                entreeDureeTour = Console.ReadLine();
+                Console.ResetColor();
+                if (entreeDureeTour == "")
+                {
+                    dureeTour = 60;
+                    estValideDureeTour = true;
+                }
+                else if (int.TryParse(entreeDureeTour, out dureeTour) && dureeTour >= 1)
+                {
+                    estValideDureeTour = true;
+                    // dureeTour = dureeTour;
+                }
+                else
+                {
+                    Console.WriteLine("Entrée invalide. Veuillez réessayer.");
+                    Console.Write("Duree d'une manche (60 si laissé vide) : ");
+                }
+            }
+            #endregion
+
+            #region Lecture nombre de manches
+
             Console.Write("\nNombre de manche par joueur ");
             Console.ForegroundColor = ConsoleColor.DarkGray;
             Console.Write("(3 si laissé vide)");
@@ -189,7 +225,7 @@ namespace boggle
             {
                 for (int y = 0; y < taille; y++)
                 {
-                    des[x, y] = new De(r, dico);
+                    des[x, y] = new De(r, dico, taille);
                 }
             }
             for (int i = 0; i < nbTours; i++)
@@ -215,14 +251,14 @@ namespace boggle
                 Console.WriteLine(" de jouer ─────────|");
                 Console.ResetColor();
 
-                TimeSpan dureeManche = TimeSpan.FromSeconds(60);
+                TimeSpan dureeManche = TimeSpan.FromSeconds(dureeTour);
                 DateTime debutManche = DateTime.Now;
 
                 Plateau plateau = new Plateau(des, dico);
                 if (vsIA && (i % 2) == 1)
                 {
                     IA ia = new IA(plateau, dico, jeu, difficulte);
-                    List<string> motsTrouvesTourIA = ia.Jouer();
+                    List<string> motsTrouvesTourIA = ia.Jouer(dureeTour);
                     foreach (var mot in motsTrouvesTourIA)
                     {
                         motsTrouves[1].Add(mot);

@@ -23,7 +23,7 @@ namespace boggle
             this.difficulte = _difficulte;
         }
 
-        public List<string> Jouer()
+        public List<string> Jouer(int dureeTour)
         {
             List<string> mots = new List<string>();
             List<string> motsInvalides = new List<string>();
@@ -52,7 +52,7 @@ namespace boggle
                 else { motsInvalides.Add(mot); }
             }
 
-            TimeSpan dureeIA = TimeSpan.FromSeconds(60);
+            TimeSpan dureeIA = TimeSpan.FromSeconds(dureeTour);
             DateTime debutIA = DateTime.Now;
             int index = 0;
             while (jeu.Minuteur(dureeIA, debutIA) > TimeSpan.Zero)

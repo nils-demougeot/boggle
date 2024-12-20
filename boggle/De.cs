@@ -18,7 +18,7 @@ namespace boggle
             set { this.faceVisible = value; }
         }
 
-        public De(Random r, Dictionnaire _dico)
+        public De(Random r, Dictionnaire _dico, int taille)
         {
             this.dico = _dico;
             this.path = $"../../../docs/Lettres{ this.dico.Langue.ToUpper() }.txt";
@@ -39,14 +39,20 @@ namespace boggle
                 }
             }
             var list = new List<KeyValuePair<int, char>>(res);
+            int[] nbLettres = new int[26];
+            for (int  i = 0; i < nbLettres.Length; i++)
+            {
+                nbLettres[i] = 0;
+            }
             for (int j = 0; j < 6; j++)
             {
                 int index = r.Next(0, 100);
                 for (int k = 0; k < res.Count; k++)
                 {
-                    if (index < list[k].Key)
+                    if (index < list[k].Key && nbLettres[k] <= (int)(list[k].Value * taille))
                     {
                         this.lettres[j] = res[list[k].Key];
+                        nbLettres[k]++;
                         break;
                     }
                 }
