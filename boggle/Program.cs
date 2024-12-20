@@ -377,27 +377,13 @@ namespace boggle
             Dictionary<string, int> motsTrouvesFrequenceJ1 = new Dictionary<string, int>();
             foreach (var mot in motsTrouves[0])
             {
-                if (motsTrouvesFrequenceJ1.ContainsKey(mot))
-                {
-                    motsTrouvesFrequenceJ1[mot]++;
-                }
-                else
-                {
-                    motsTrouvesFrequenceJ1[mot] = 1;
-                }
+                motsTrouvesFrequenceJ1[mot] = jeu.UpdateScore(0, mot);
             }
 
             Dictionary<string, int> motsTrouvesFrequenceJ2 = new Dictionary<string, int>();
             foreach (var mot in motsTrouves[1])
             {
-                if (motsTrouvesFrequenceJ2.ContainsKey(mot))
-                {
-                    motsTrouvesFrequenceJ2[mot]++;
-                }
-                else
-                {
-                    motsTrouvesFrequenceJ2[mot] = 1;
-                }
+                motsTrouvesFrequenceJ2[mot] = jeu.UpdateScore(0, mot);
             }
 
             NuageDeMots.Affichage(motsTrouvesFrequenceJ1, motsTrouvesFrequenceJ2);
