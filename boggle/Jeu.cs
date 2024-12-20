@@ -7,10 +7,11 @@ using System.Threading.Tasks;
 public class Jeu
 {
     Joueur[] joueurs;
-    string path = "../../../docs/Lettres.txt";
+    string path;
 
     public Jeu(int _minuteur)
     {
+        path = "../../../docs/LettresFR.txt";
         this.joueurs = new Joueur[2];
     }
 

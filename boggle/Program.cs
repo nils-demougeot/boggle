@@ -213,7 +213,7 @@ class Program
             Console.WriteLine(" de jouer ─────────|");
             Console.ResetColor();
 
-            TimeSpan dureeManche = TimeSpan.FromSeconds(5);//modif
+            TimeSpan dureeManche = TimeSpan.FromSeconds(60);
             DateTime debutManche = DateTime.Now;
             
             Plateau plateau = new Plateau(des, dico);

@@ -17,12 +17,9 @@ public class De
 
     public De(Random r, Dictionnaire _dico)
     {
-        this.path = "../../../docs/Lettres.txt";
         this.dico = _dico;
-        if (this.dico.Langue != "fr") 
-        {
-            this.path = "../../../docs/LettresEN.txt";
-        }
+        this.path = $"../../../docs/Lettres{ this.dico.Langue.ToUpper() }.txt";
+
         this.lettres = new char[6];
         string texte = File.ReadAllText(this.path);
         Dictionary<int, char> res = new Dictionary<int, char>();
