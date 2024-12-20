@@ -39,7 +39,7 @@ namespace boggle
             Random random = new Random();
             int maxFrequency = associationMotFrequence.Values.Max();
             int minFontSize = 15;
-            int maxFontSize = 75;
+            int maxFontSize = 55;
 
             var sortedWords = associationMotFrequence.OrderByDescending(kvp => kvp.Value);
 

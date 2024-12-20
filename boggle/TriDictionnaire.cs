@@ -129,5 +129,29 @@ public class TriDictionnaire
         }
     }
     #endregion
+
+    #region Tri par insertion
+    /// <summary>
+    /// Tri un tableau par ordre alphabétique en utilisant la methode par insertion
+    /// </summary>
+    /// <param name="tab">Tableau non trié à trier</param>
+    static void TriInsertion(string[] tab)
+    {
+        int n = tab.Length;
+        for (int i = 1; i < n; i++)
+        {
+            string indice = tab[i];
+            int j = i - 1;
+
+            while (j >= 0 && string.Compare(tab[j], indice) > 0)
+            {
+                tab[j + 1] = tab[j];
+                j--;
+            }
+
+            tab[j + 1] = indice;
+        }
+    }
+    #endregion
 }
 
