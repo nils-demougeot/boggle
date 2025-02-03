@@ -34,4 +34,4 @@ This is a console-based Boggle game developed in C# as part of a student project
 
 1. Clone the repository to your local machine:
    ```bash
-   git clone https://github.com/your-username/boggle-game.git
+   git clone https://github.com/tomdcx/boggle.git
